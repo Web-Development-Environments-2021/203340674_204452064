@@ -9,21 +9,35 @@ var interval;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+	//logo window
+	initial();
+	
+
+	//game window
+	//Start();
 });
+function initial() {
+	document.getElementById("logo").style.display = "block";
+	document.getElementById("register").style.display = "block";
+	document.getElementById("login").style.display = "block";
+}
+
 
 function Start() {
+	//initial score&time
+	document.getElementById("score").style.display = "block";
+	document.getElementById("time").style.display = "block";
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
-	var cnt = 100;
-	var food_remain = 50;
-	var pacman_remain = 1;
+	var cnt = 100;//num of cells
+	var food_remain = 50;//num of sweets on board
+	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
+		for (var j = 0; j < 10; j++) { //obstacles
 			if (
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
@@ -34,7 +48,7 @@ function Start() {
 				board[i][j] = 4;
 			} else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
+				if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
 					food_remain--;
 					board[i][j] = 1;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
@@ -49,11 +63,12 @@ function Start() {
 			}
 		}
 	}
-	while (food_remain > 0) {
+	while (food_remain > 0) {//all remain sweets
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		food_remain--;
 	}
+	//click
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -71,7 +86,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 }
-
+// get empty cell
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
@@ -113,7 +128,7 @@ function Draw() {
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == 1) {
