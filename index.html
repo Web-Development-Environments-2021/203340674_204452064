@@ -5,7 +5,9 @@
 	<script src="./jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./register.js"></script>
+	<script type="text/javascript" src="./login.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style.css" />
+	
 </head>
 
 <body>
@@ -41,7 +43,9 @@
 			<br>
 			<label for="birthday">Birthday:</label> 
 			<input type="date" id="birthday" name="birthday">
-  
+			<button type="submit" style="font-size: x-large; font-family: 'papyrus', fantasy;">register</button>
+			<br>
+			<br>
 		</form>
 	</div>
 
@@ -57,7 +61,19 @@
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
-</div>
+	</div>
+	<div id ="login_window">
+		<form>
+			<label for="name">Name</label>
+			<input type="text" name = "name" id ="name" required>
+			<br>
+			<label for="password">Password</label>
+			<input type="password" name = "psw" id ="psw" required>
+			<br>
+			<button type="submit" onclick="checkUserExist()" style="font-size: x-large; font-family: 'papyrus', fantasy;">login</button>
+			<br>
+		</form>
+	</div>
 </body>
 
 </html>

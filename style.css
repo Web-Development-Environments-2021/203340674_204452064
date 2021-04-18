@@ -4,3 +4,6 @@
 #game_window{
     display:none;
 }
+#login_window{
+    display: none;
+}
