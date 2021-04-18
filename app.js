@@ -25,8 +25,8 @@ function initial() {
 
 function Start() {
 	//initial score&time
-	document.getElementById("score").style.display = "block";
-	document.getElementById("time").style.display = "block";
+	document.getElementById("game_window").style.display = "block";
+	
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
