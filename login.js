@@ -16,11 +16,6 @@ function checkInDatabase(user,pass){
             return true;
         }
     }
-    // const found = users.some(e1=>e1.username === user);
-    // if (found){
-    //     return true;
-    // }
-
 }
 
 function checkUserExist(){
@@ -28,14 +23,13 @@ function checkUserExist(){
     let inputPass = document.getElementById("psw_login").value;
 
     if(checkInDatabase(inputUser,inputPass)){
-        alert("exist");
         document.getElementById("login_window").style.display= "none";
         document.getElementById("game_window").style.display="block";
+        Start();
     }
     else{
         alert("Invalid user or password. please try again");
     }
-    alert("notExist");
 }
 
 
