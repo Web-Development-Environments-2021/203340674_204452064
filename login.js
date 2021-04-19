@@ -1,13 +1,11 @@
-// var imported = document.createElement('script');
-// imported.src = '/path/to/imported/script';
-// document.head.appendChild(imported);
+// import {users} from './register.js';
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 
 });
 
-function login(){
+function loginfunc(){
     document.getElementById("first_window").style.display= "none";
     document.getElementById("login_window").style.display="block";
 }
@@ -18,22 +16,27 @@ function checkInDatabase(user,pass){
             return true;
         }
     }
+    // const found = users.some(e1=>e1.username === user);
+    // if (found){
+    //     return true;
+    // }
+
 }
 
 function checkUserExist(){
-    // var inputUser = document.getElementById("username").value;
-    // var inputPass = document.getElementById("psw_login").value;
+    let inputUser = document.getElementById("username").value;
+    let inputPass = document.getElementById("psw_login").value;
 
-    // if(checkInDatabase(inputUser,inputPass)===true){
-    if(checkInDatabase(5,5)===true){
+    if(checkInDatabase(inputUser,inputPass)){
+        alert("exist");
         document.getElementById("login_window").style.display= "none";
         document.getElementById("game_window").style.display="block";
     }
     else{
-        alert("Invalid user or password. please try again")
+        alert("Invalid user or password. please try again");
     }
+    alert("notExist");
 }
-
 
 
 
