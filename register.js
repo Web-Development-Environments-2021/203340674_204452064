@@ -1,6 +1,6 @@
 var users =[{
     username:"k",
-    password:"k ",
+    password:"k",
     fullname:"k k",
     email:"k@gmail.com",
     birthday:"14/01/1993"
