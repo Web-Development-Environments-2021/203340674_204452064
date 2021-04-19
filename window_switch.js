@@ -12,9 +12,16 @@ function switchToRegister(){
 function switchToGame(){
     $('#windows').children().hide();
     $('#game_window').show();
+    Start();
 }
 
 function switchToWelcome(){
     $('#windows').children().hide();
     $('#first_window').show();
 }
+
+function switchTosettings(){
+    $('#windows').children().hide();
+    $('#settings_window').show();
+}
+
