@@ -1,6 +1,6 @@
 var users =[{
     username:"k",
-    password:"k ",
+    password:"k",
     fullname:"k k",
     email:"k@gmail.com",
     birthday:"14/01/1993"
@@ -18,6 +18,7 @@ function registerButton(){
 
 function addUser()
 {
+    alert(users.length)
     let nameValid = false, pswValid = false, fullnameValid = false, emailValid = false;
 
     let nameF = document.getElementById("name").value;
@@ -66,52 +67,23 @@ function addUser()
     }
     let bdF = document.getElementById("birthday").value;
     //add new user
-    if(nameValid == true, pswValid == true, fullnameValid == true, emailValid == true)
+    if(nameValid == true && pswValid == true && fullnameValid == true && emailValid == true)
     {
+        
         users.push({username: nameF, password: passwordF,
                     fullname: fullnameF,email: emailF,birthday: bdF});
-                    
+                    loginfunc();                  
 
     }
     else{ // back to first window
         document.getElementById("first_window").style.display = "block";
-        document.getElementById("register_window").style.display="none";}
-
+        document.getElementById("register_window").style.display="none";
     }
+
+    
 
 
 }  
 
 
 
-// var value = $("#password_reg").val();
-// $.validator.addMethod("checkdigit", function(value) {
-//   return /[0-9]/.test(value);
-// });
-// $.validator.addMethod("checkletter", function(value) {
-//   return /[a-z]/.test(value);
-// });
-// $("#register_window").on("pageinit",function(){
-//     $("registerform").validate({
-//     rules: 
-//     {
-//         password:
-//         {
-//             required: true,
-//             minlength:6,
-//             // checkdigit:true,
-//             // checkletter:true,
-
-//         }
-       
-//     },       
-//     messages:{
-//         password:
-//         {
-//             // checkdigit:"Need at least 1 digit",
-//             // checkletter:"Need at least 1 letter",
-//             minlength:"Your password must be at least 6 characters long"
-//         }
-//     }  
-//     });
-// });
