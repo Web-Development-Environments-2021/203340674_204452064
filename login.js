@@ -5,10 +5,10 @@ $(document).ready(function() {
 
 });
 
-function loginfunc(){
-    document.getElementById("first_window").style.display= "none";
-    document.getElementById("login_window").style.display="block";
-}
+// function loginfunc(){
+//     document.getElementById("first_window").style.display= "none";
+//     document.getElementById("login_window").style.display="block";
+// }
 
 function checkInDatabase(user,pass){
     for( let i= 0; i < users.length; i++){
@@ -23,8 +23,9 @@ function checkUserExist(){
     let inputPass = document.getElementById("psw_login").value;
 
     if(checkInDatabase(inputUser,inputPass)){
-        document.getElementById("login_window").style.display= "none";
-        document.getElementById("game_window").style.display="block";
+        // document.getElementById("login_window").style.display= "none";
+        // document.getElementById("game_window").style.display="block";
+        switchToGame();
         Start();
     }
     else{
