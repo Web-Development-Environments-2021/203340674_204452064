@@ -13,6 +13,7 @@ $(document).ready(function() {
 	
 });
 function registerButton(){
+    
     document.getElementById("first_window").style.display = "none";
     document.getElementById("register_window").style.display="block";}
 
