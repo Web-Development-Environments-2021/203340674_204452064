@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="./register.js"></script>
 	<script type="text/javascript" src="./login.js"></script>
 	<script type="text/javascript" src="./window_switch.js"></script>
+	<script type="text/javascript" src="./Settings.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style.css" />
 	
 </head>
@@ -88,6 +89,24 @@
 			<button type="button" onclick="checkUserExist()" style="font-size: x-large; font-family: 'papyrus', fantasy;">login</button>
 			<br>
 		</form>
+	</div>
+	<div id= "settings_window">
+		please choose keys for the game
+		<br>
+		<label for="up">up Key</label>
+		<input type="text" name = "up" id ="upKey" required>
+		<br>
+		<label for="down">down Key</label>
+		<input type="text" name = "down" id ="dowmkey" required>
+		<br>
+		<label for="left">left Key</label>
+		<input type="text" name = "left" id ="leftKey" required>
+		<br>
+		<label for="right">rightKeys</label>
+		<input type="text" name = "right" id ="rightKey" required>
+		<button type="button" onclick="chooseKeys()">OK</button>
+		<br>
+		<button type="button" onclick="switchToGame()">GoToGame</button>
 	</div>
 </div>
 <dialog id="modal-dialog">

@@ -6,15 +6,20 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var upKey=40;
-var downKey=38;
-var rightKey=39;
-var leftkey=37;
+// var upKey=40;
+// var downKey=38;
+// var rightKey=39;
+// var leftkey=37;
+var upKey;
+var downKey;
+var rightKey;
+var leftkey;
 var food_remain=50;
 var color5Point;
 var color15Poitnt;
 var color25Point;
 var timeGame;
+var NumOfManster;
 
 
 $(document).ready(function() {
@@ -105,16 +110,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[upKey]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[downKey]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[leftkey]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[rightKey]) {
 		return 4;
 	}
 }
