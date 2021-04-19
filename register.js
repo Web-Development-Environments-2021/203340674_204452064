@@ -12,9 +12,9 @@ $(document).ready(function() {
 
 	
 });
-function registerButton(){
-    document.getElementById("first_window").style.display = "none";
-    document.getElementById("register_window").style.display="block";}
+// function registerButton(){
+//     document.getElementById("first_window").style.display = "none";
+//     document.getElementById("register_window").style.display="block";}
 
 function addUser()
 {
@@ -27,10 +27,10 @@ function addUser()
     if (found){
         alert("name already exist, try to login, or try another name")
         if(confirm('Login')){
-            loginfunc();
+            switchToLogin();
         }
         else if(confirm('try another name'))
-            registerButton();
+            switchToRegister();
     }
     else{
         nameValid = true;
@@ -72,12 +72,13 @@ function addUser()
         
         users.push({username: nameF, password: passwordF,
                     fullname: fullnameF,email: emailF,birthday: bdF});
-                    loginfunc();                  
+                    switchToLogin();                 
 
     }
     else{ // back to first window
-        document.getElementById("first_window").style.display = "block";
-        document.getElementById("register_window").style.display="none";
+        // document.getElementById("first_window").style.display = "block";
+        // document.getElementById("register_window").style.display="none";
+        switchToRegister();
     }
 
     

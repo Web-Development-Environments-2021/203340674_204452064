@@ -6,32 +6,39 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var upKey=40;
+var downKey=38;
+var rightKey=39;
+var leftkey=37;
+var food_remain=50;
+var color5Point;
+var color15Poitnt;
+var color25Point;
+var timeGame;
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	//logo window
 	initial();
-	
-
 	//game window
 	//Start();
 });
 function initial() {
-	document.getElementById("logo").style.display = "block";
-	document.getElementById("register").style.display = "block";
-	document.getElementById("login").style.display = "block";
+	// document.getElementById("logo").style.display = "block";
+	// document.getElementById("register").style.display = "block";
+	// document.getElementById("login").style.display = "block";
+	switchToWelcome();
 }
-
 
 function Start() {
 	//initial score&time
-	document.getElementById("game_window").style.display = "block";
-	
+	// document.getElementById("game_window").style.display = "block";
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;//num of cells
-	var food_remain = 50;//num of sweets on board
+	// var food_remain = 50;//num of sweets on board
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
