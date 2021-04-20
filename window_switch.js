@@ -19,9 +19,31 @@ function switchToWelcome(){
     $('#windows').children().hide();
     $('#first_window').show();
 }
+function switchDialogAboout(){
+    $('#modal-dialog').show()
+    //esc press
+    $(document).on('keydown',function(e)
+    {
+        if(e.keyCode == 27)
+        {
+            $('#modal-dialog').hide();
+        }
+    })
+    //X button
+    $('#close').click(function()
+    {
+        $('#modal-dialog').hide()
+    })
+
+    
+    
+
+}
+
 
 function switchTosettings(){
     $('#windows').children().hide();
     $('#settings_window').show();
 }
+
 

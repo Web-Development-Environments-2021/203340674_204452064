@@ -15,10 +15,10 @@
 <body>
 	<h1>PacMan</h1>
 	<div class="menu">
-		<a onclick="switchToWelcome()">Welcome</a>
-		<a onclick="switchToRegister()">Register</a>
-		<a onclick="switchToLogin()">Login</a>
-		<a href="#modal-dialog">About</a>
+		<a  onclick="switchToWelcome()">Welcome</a>
+		<a  onclick="switchToRegister()">Register</a>
+		<a  onclick="switchToLogin()">Login</a>
+		<a id = "about" onclick = "switchDialogAboout()">About</a>
 	</div>
 	<div id = "windows">
 	<div id="first_window">
@@ -110,11 +110,16 @@
 	</div>
 </div>
 <dialog id="modal-dialog">
+	<button id="close" class="close" type="button">&times;</button>
 	<p>Shay Erlich & Hallel Helfand</p>
 	<p>uses in jquery.....</p>
 	<p>template uses.....</p>
 	<p>dificult...........</p>
 </dialog>
+	
+	
+
+
 </body>
 
 </html>
