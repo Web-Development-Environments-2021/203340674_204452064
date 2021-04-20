@@ -6,10 +6,10 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-// var upKey=40;
-// var downKey=38;
-// var rightKey=39;
-// var leftkey=37;
+// var upKey=39;
+// var downKey=37;
+// var rightKey=38;
+// var leftkey=40;
 var upKey;
 var downKey;
 var rightKey;
@@ -134,18 +134,21 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) { // packman
+				
+				// var direction = GetKeyPressed();
+				// var center_x = center.x;
+				// var center_y = center.y;
+				// DrawPack(direction,center_x,center_y);
+				//before 
 				context.beginPath();
-				var direction = GetKeyPressed();
-				//call drawPack with direction(left/right/down/up)
-				DrawPack(direction);
-				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				// context.lineTo(center.x, center.y);
-				// context.fillStyle = pac_color; //color
-				// context.fill();
-				// context.beginPath();
-				// context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
-				// context.fillStyle = "black"; //color
-				// context.fill();
+				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
+				context.fillStyle = "black"; //color
+				context.fill();
 			} else if (board[i][j] == 1) { // sweets
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -160,18 +163,49 @@ function Draw() {
 		}
 	}
 }
-function DrawPack(direction){
-	if (direction == 2){
-		DrawBody(30,0.15,1.85)
-		context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-		context.lineTo(center.x, center.y);
-		context.fillStyle = pac_color; //color
-		context.fill();
-		context.beginPath();
-		context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
-		context.fillStyle = "black"; //color
-		context.fill();
+function DrawPack(direction,center_x,center_y)
+{
+	if (direction == 2){//right
+		DrawBody(0.15,1.85,center_x,center_y);
+		DrawEye(15,5,0,2,center_x,center_y);
 	}
+	if(direction == 1) //left
+	{
+		DrawBody(1.35,0.65,center_x,center_y);
+		DrawEye(15,5,0,2,center_x,center_y);
+	}
+	if(direction == 3) //up
+	{
+		DrawBody(0.65,0.15,center_x,center_y)
+		DrawEye(15,5,0,2,center_x,center_y)
+	}
+	if(direction == 4) //down
+	{
+		DrawBody(1.85,1.35,center_x,center_y)
+		DrawEye(15,5,0,2,center_x,center_y)
+	}
+	else{ // _default right
+		DrawBody(0.15,1.85,center_x,center_y)
+		DrawEye(15,5,0,2,center_x,center_y)
+	}
+		
+	
+}
+function DrawBody(startAngle,endAngle,center_x,center_y){
+	context.beginPath();
+	context.arc(center_x, center_y, 30, startAngle * Math.PI, endAngle * Math.PI); // half circle
+	context.lineTo(center_x, center_y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	
+
+}
+function DrawEye(centerX,centerY,startAngle,endAngle,center_x,center_y){
+	context.beginPath();
+	context.arc(center_x + centerX, center_y - centerY,5,startAngle, endAngle * Math.PI); // circle - eye
+	context.fillStyle = "black"; //color
+	context.fill();
+
 }
 
 function UpdatePosition() {
