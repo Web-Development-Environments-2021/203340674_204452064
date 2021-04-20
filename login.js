@@ -25,8 +25,7 @@ function checkUserExist(){
     if(checkInDatabase(inputUser,inputPass)){
         // document.getElementById("login_window").style.display= "none";
         // document.getElementById("game_window").style.display="block";
-        switchToGame();
-        Start();
+        switchTosettings(); 
     }
     else{
         alert("Invalid user or password. please try again");

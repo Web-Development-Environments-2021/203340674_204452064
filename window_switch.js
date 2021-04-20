@@ -12,6 +12,7 @@ function switchToRegister(){
 function switchToGame(){
     $('#windows').children().hide();
     $('#game_window').show();
+    Start();
 }
 
 function switchToWelcome(){
@@ -38,3 +39,11 @@ function switchDialogAboout(){
     
 
 }
+
+
+function switchTosettings(){
+    $('#windows').children().hide();
+    $('#settings_window').show();
+}
+
+
