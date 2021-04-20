@@ -6,20 +6,23 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-// var upKey=40;
-// var downKey=38;
-// var rightKey=39;
-// var leftkey=37;
-var upKey;
-var downKey;
-var rightKey;
-var leftkey;
+var upKey=38;
+var downKey=40;
+var rightKey=39;
+var leftkey=37;
 var food_remain=50;
 var color5Point;
 var color15Poitnt;
 var color25Point;
 var timeGame;
 var NumOfManster;
+var direction;
+var start = 0.15;
+var end = 1.85;
+var eyeX = 5;
+var eyeY = -15;
+
+
 
 
 $(document).ready(function() {
@@ -110,18 +113,21 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
+	if (keysDown[leftkey]) {
+		return 1;
+	}
+	
 	if (keysDown[upKey]) {
+		return 2;
+	}
+	if (keysDown[rightKey]) {
 		return 3;
 	}
 	if (keysDown[downKey]) {
 		return 4;
 	}
-	if (keysDown[leftkey]) {
-		return 1;
-	}
-	if (keysDown[rightKey]) {
-		return 2;
-	}
+	
+	
 }
 
 function Draw() {
@@ -133,19 +139,38 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			if (board[i][j] == 2) { // packman
-				context.beginPath();
-				var direction = GetKeyPressed();
-				//call drawPack with direction(left/right/down/up)
-				DrawPack(direction);
-				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				// context.lineTo(center.x, center.y);
-				// context.fillStyle = pac_color; //color
-				// context.fill();
-				// context.beginPath();
-				// context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
-				// context.fillStyle = "black"; //color
-				// context.fill();
+			if (board[i][j] == 2) { // packman	
+				var center_x = center.x;
+				var center_y = center.y;
+				//DrawPack(direction,center_x,center_y);
+				//before 
+				
+				if(direction == 2) //up
+				{
+				DrawBody(1.7,1.3,center_x,center_y)
+				DrawEye(14,2,center_x,center_y);
+
+				}
+				else if(direction == 1){//left
+					DrawBody(1.2,0.85,center_x,center_y)
+					DrawEye(5,-15,center_x,center_y)
+
+				}
+				else if(direction==4){//down
+					DrawBody(0.6,0.4,center_x,center_y);
+					DrawEye(13,2,center_x,center_y);
+
+				}
+				else if(direction==3){//right
+					DrawBody(0.15,1.85,center_x,center_y)
+					DrawEye(5,-15,center_x,center_y)
+				}
+				else{
+					DrawBody(start,end,center_x,center_y);
+					DrawEye(eyeX,eyeY,center_x,center_y);
+				
+				}
+				
 			} else if (board[i][j] == 1) { // sweets
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -160,39 +185,52 @@ function Draw() {
 		}
 	}
 }
-function DrawPack(direction){
-	if (direction == 2){
-		DrawBody(30,0.15,1.85)
-		context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-		context.lineTo(center.x, center.y);
-		context.fillStyle = pac_color; //color
-		context.fill();
-		context.beginPath();
-		context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
-		context.fillStyle = "black"; //color
-		context.fill();
-	}
+
+	
+
+function DrawBody(startAngle,endAngle,center_x,center_y){
+	start = startAngle;
+	end = endAngle;
+	context.beginPath();
+	context.arc(center_x, center_y, 30, startAngle * Math.PI, endAngle * Math.PI); // half circle
+	context.lineTo(center_x, center_y);
+	context.fillStyle = pac_color; //color
+	context.fill();
+	
+
+}
+function DrawEye(locX,locY,center_x,center_y){
+	eyeX = locX;
+	eyeY = locY
+	context.beginPath();
+	context.arc(center_x + locX, center_y + locY,5,0, 2 * Math.PI); // circle - eye
+	context.fillStyle = "black"; //color
+	context.fill();
+
 }
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	if (x == 1) {
+	direction = x;
+	
+	if (x == 2) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) { //left
 			shape.j--;
 		}
 	}
-	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) { ////right
-			shape.j++;
-		}
-	}
-	if (x == 3) {
+	if (x == 1) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) { //up
 			shape.i--;
 		}
 	}
 	if (x == 4) {
+		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) { ////right
+			shape.j++;
+		}
+	}
+	
+	if (x == 3) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {//down
 			shape.i++;
 		}
@@ -210,6 +248,8 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
+		
 		Draw();
+		
 	}
 }

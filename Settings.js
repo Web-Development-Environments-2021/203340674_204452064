@@ -1,15 +1,15 @@
 
-function chooseKeys(){
-    let downInput = document.getElementById("down").value.charCodeAt(0);
-    let upInput = document.getElementById("up").value.charCodeAt(0);
-    let leftInput = document.getElementById("left").value.charCodeAt(0);
-    let rightInput = document.getElementById("right").value.charCodeAt(0);
-    upKey= upInput;
-    downKey= downInput;
-    rightKey= rightInput;
-    leftkey= leftInput;
-    alert("y");
-}
+// function chooseKeys(){
+//     let downInput = document.getElementById("down").value.charCodeAt(0);
+//     let upInput = document.getElementById("up").value.charCodeAt(0);
+//     let leftInput = document.getElementById("left").value.charCodeAt(0);
+//     let rightInput = document.getElementById("right").value.charCodeAt(0);
+//     upKey= upInput;
+//     downKey= downInput;
+//     rightKey= rightInput;
+//     leftkey= leftInput;
+//     alert("y");
+// }
 
 
 // function chooseBalls(){
