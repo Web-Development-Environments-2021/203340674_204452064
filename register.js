@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 function addUser()
 {
-    alert(users.length)
+    //console.print("")
     let nameValid = false, pswValid = false, fullnameValid = false, emailValid = false;
 
     let nameF = document.getElementById("name").value;
