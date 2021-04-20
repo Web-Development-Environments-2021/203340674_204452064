@@ -1,15 +1,16 @@
 
-function chooseKeys() {
-    alert(downInput);
-    let downInput = document.getElementById("downKey").value.charCodeAt(0);
-    let upInput = document.getElementById("upKey").value.charCodeAt(0);
-    let leftInput = document.getElementById("leftKey").value.charCodeAt(0);
-    let rightInput = document.getElementById("rightKey").value.charCodeAt(0);
+function chooseKeys(){
+    let downInput = document.getElementById("down").value.charCodeAt(0);
+    let upInput = document.getElementById("up").value.charCodeAt(0);
+    let leftInput = document.getElementById("left").value.charCodeAt(0);
+    let rightInput = document.getElementById("right").value.charCodeAt(0);
     upKey= upInput;
     downKey= downInput;
     rightKey= rightInput;
     leftkey= leftInput;
-};
+    alert("y");
+}
+
 
 // function chooseBalls(){
 //     food_remain = document.getElementById("ballsToEat").value; 
