@@ -4,27 +4,26 @@ var board;
 var score;
 var pac_color;
 var start_time;
+var timeGame;
 var time_elapsed;
+var time_remain = timeGame;
 var interval;
 var upKey=38;
 var downKey=40;
 var rightKey=39;
 var leftkey=37;
-// var upKey;
-// var downKey;
-// var rightKey;
-// var leftkey;
-var food_remain;
+var food_remain=50;
 var color5Point;
 var color15Poitnt;
 var color25Point;
-var timeGame;
 var NumOfManster;
 var direction;
 var start = 0.15;
 var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
+
+
 
 
 
@@ -137,13 +136,14 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblPlayerName.value = document.getElementById("username").value;;
+	//lblTime.value = time_remain;
+	lblTime.value = time_remain	
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-
 			if (board[i][j] == 2) { // packman	
 				var center_x = center.x;
 				var center_y = center.y;
@@ -176,11 +176,10 @@ function Draw() {
 				
 				}
 				
-
 			} else if (board[i][j] == 1) { // sweets
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = color5Point; //color
+				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
@@ -247,6 +246,11 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	time_remain = timeGame - time_elapsed;
+	if( time_remain <= 0){
+		window.clearInterval(interval);
+		window.alert("TTTTTime");
+	}
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
@@ -259,6 +263,4 @@ function UpdatePosition() {
 		
 	}
 }
-
-
 
