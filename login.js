@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 function checkInDatabase(user,pass){
     for( let i= 0; i < users.length; i++){
-        if(users[i].username=== user && users[i].password=== pass){
+        if(users[i].username=== user && users[i].password=== pass){           
             return true;
         }
     }
