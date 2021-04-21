@@ -61,7 +61,6 @@
 			<br>
 			<button id="regbutton" onclick="addUser()"></button>Register</button>
 			<br>	
-
 		</form>
 	</div>
 
@@ -105,7 +104,31 @@
 		<label for="right">rightKeys</label>
 		<input type="text" name = "right" id ="right" required>
 		<button type="button" onclick="chooseKeys()">OK</button>
-		<br> -->
+
+		<br>
+		<label for="numofballs">number of balls</label>
+		<input type="text" name ="balls" id ="ballsToEat" min="50" max="90" required>
+		<button type="button" onclick="chooseBalls()">OK</button>
+		<br>
+		choose color:
+		<br>
+		<label for="color5ball">color for 5 point</label>		   
+		<input type="color" name ="color5" id ="color5" required><br>
+		<label for="color5ball">color for 15 point</label>		   
+		<input type="color" name ="color15" id ="color15" required><br>
+		<label for="color5ball">color for 25 point</label>		   
+		<input type="color" name ="color25" id ="color25" required>
+		<button type="button" onclick="chooseColorBall()">OK</button>
+		<br>
+		<label for="timeForGame">time for the game</label>		   
+		<input type="number" name ="timeGame" id ="timeGame" required>
+		<button type="button" onclick="chooseTimePlay()">OK</button>
+		<br>
+		<label for="manster">number of munster</label>		   
+		<input type="number" name ="numOfManster" id ="numOfManster" required>
+		<button type="button" onclick="chooseNumOfmanster()">OK</button>
+		<br>
+
 		<button type="button" onclick="switchToGame()">GoToGame</button>
 	</div>
 </div>
