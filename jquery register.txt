@@ -1,0 +1,57 @@
+html - jquery register:
+<div id="registerWindow"> 
+		<form id="register-form">
+			<div>
+				<input name="name" placeholder="Name" type="text">
+			</div>
+			<div>
+				<input name="email" placeholder="Email Address" type="text">
+			</div>
+			<div>
+				<input name="password" id="password" placeholder="Password" type="password">
+			</div>
+			<div>
+				<input name="fullname" placeholder="Full name" type="text">
+			</div>
+			<input class="btn btn-primary" id="submit-button" type="submit" value="Register">		
+		</form>
+	</div>
+
+register - jquery reg:
+$(function() {
+    $.validator.addMethod('strongPassword' , function(value,element){
+        return this.optional(element) || value.length>=6 && /\d/.test(value) && /[a-z]/i.test(value);
+    
+    }, 'Your password must be at least 6 characters long and contain one number and one char\'.')
+
+    $("#register-form").validate({
+        rules: {
+            email:{
+                required: true,
+                email:true
+            },
+            password:
+            {
+                required:true,
+                strongPassword:true
+            },
+            name:{
+                required:true,
+
+            },
+            fullname:{
+                lettersonly:true
+            }  
+        },
+        messages: {
+            email:
+            {
+                required: 'Please enter an email address.',
+                email: 'Please enter a <em>valid</em> email address.'
+
+            }
+
+        }
+
+    });
+})
