@@ -1,4 +1,5 @@
 
+
 function chooseKeys(){
     downKey = asciiNum(document.getElementById("down").value);
     upKey= asciiNum(document.getElementById("up").value);
@@ -6,6 +7,8 @@ function chooseKeys(){
     rightKey = asciiNum(document.getElementById("right").value);
     alert("after");
 }
+
+
 
 function asciiNum(num){
     let key= num.charCodeAt(0);
