@@ -6,15 +6,15 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-// var upKey=40;
-// var downKey=38;
-// var rightKey=39;
-// var leftkey=37;
-var upKey;
-var downKey;
-var rightKey;
-var leftkey;
-var food_remain=50;
+var upKey=38;
+var downKey=40;
+var rightKey=39;
+var leftkey=37;
+// var upKey;
+// var downKey;
+// var rightKey;
+// var leftkey;
+var food_remain;
 var color5Point;
 var color15Poitnt;
 var color25Point;
@@ -137,19 +137,19 @@ function Draw() {
 				context.beginPath();
 				var direction = GetKeyPressed();
 				//call drawPack with direction(left/right/down/up)
-				DrawPack(direction);
-				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				// context.lineTo(center.x, center.y);
-				// context.fillStyle = pac_color; //color
-				// context.fill();
-				// context.beginPath();
-				// context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
-				// context.fillStyle = "black"; //color
-				// context.fill();
+				//DrawPack(direction);
+				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle - eye
+				context.fillStyle = "black"; //color
+				context.fill();
 			} else if (board[i][j] == 1) { // sweets
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = color5Point; //color
 				context.fill();
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
@@ -213,3 +213,6 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+
+
+
