@@ -45,6 +45,22 @@ function initial() {
 	switchToWelcome();
 }
 
+function EmptyCellForMonster(){
+	var cellsOfMonsters = [] //location of monster
+	var corners=[(0,0),(0,9),(9,0),(9,9)]; // all corners
+	var monstersRemain = numOfManster;
+	while(monsterRemain!=0){
+		cornerNum = Math.floor(Math.random() * monstersRemain); // choose random corner-> 0-3,0-2....
+		var removedCorner = corners[cornerNum];
+		cellsOfMonsters.push(removedCorner) // add corner to a new list
+		corners.splice(cornerNum,1); // remove the corner from list
+		monstersRemain --;
+	}
+	return cellsOfMonsters;
+
+
+}
+
 function Start() {
 	//initial score&time
 	// document.getElementById("game_window").style.display = "block";
@@ -55,11 +71,17 @@ function Start() {
 	// var food_remain = 50;//num of sweets on board
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
+	monstersLoc = EmptyCellForMonster()
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) { //obstacles
-			if (
+			if(monstersLoc.include((i,j))){
+				board[i][j] = 6;
+			}
+
+			
+			else if  (
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
@@ -68,6 +90,7 @@ function Start() {
 			) {
 				board[i][j] = 4;
 			} else {
+				
 				var randomNum = Math.random();
 				// if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
 				// 	food_remain--;
@@ -157,6 +180,8 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
+
+
 function GetKeyPressed() {
 	if (keysDown[leftkey]) {
 		return 1;
@@ -233,6 +258,12 @@ function Draw() {
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
+			else if(board[i][j] == 6 ){ //monster
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
 		}
 	}
 }
@@ -302,6 +333,8 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 1) {
 		score++;
 	}
+	//if (board[shape.i][shape.j] == monster) { //monster cell
+	//	game over? score status....;
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
