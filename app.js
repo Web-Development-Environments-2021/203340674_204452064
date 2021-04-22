@@ -10,13 +10,12 @@ var upKey=38;
 var downKey=40;
 var rightKey=39;
 var leftkey=37;
-// var upKey;
-// var downKey;
-// var rightKey;
-// var leftkey;
 var food_remain;
+var food5;
+var food15;
+var food25;
 var color5Point;
-var color15Poitnt;
+var color15Point;
 var color25Point;
 var timeGame;
 var NumOfManster;
@@ -67,10 +66,26 @@ function Start() {
 				board[i][j] = 4;
 			} else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
-					food_remain--;
+				// if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
+				// 	food_remain--;
+				// 	board[i][j] = 1;
+				// }
+				if (randomNum <= (1.0 * food5) / cnt) { // put sweets
 					board[i][j] = 1;
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+					food5--;
+					food_remain--;
+				}
+				else if(randomNum <= (1.0 * food15) / cnt){
+					board[i][j] = 3;
+					food15--;
+					food_remain--;
+				} 
+				else if(randomNum <= (1.0 * food25) / cnt){
+					food25--;
+					food_remain--;
+					board[i][j] = 5;
+				}
+				else if ((randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) && pacman_remain>0) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
@@ -82,11 +97,14 @@ function Start() {
 			}
 		}
 	}
-	while (food_remain > 0) {//all remain sweets
-		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
-		food_remain--;
-	}
+	// food_remain= food_remain-food5-food15;
+	setFoodRemaine();
+	// while (food_remain > 0) {//all remain sweets
+	// 	var emptyCell = findRandomEmptyCell(board);
+	// 	board[emptyCell[0]][emptyCell[1]] = 1;
+	// 	food_remain--;
+	// }
+	// setFoodRemaine();
 	//click
 	keysDown = {};
 	addEventListener(
@@ -105,6 +123,26 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 }
+
+function setFoodRemaine(){
+	while (food_remain > 0) {//all remain sweets
+		var emptyCell = findRandomEmptyCell(board);
+		if(food5>0){
+			board[emptyCell[0]][emptyCell[1]] = 1;
+			food5--;
+		}
+		else if(food15>0){
+			board[emptyCell[0]][emptyCell[1]] = 3;
+			food15--;
+		}
+		else if(food25>0){
+			board[emptyCell[0]][emptyCell[1]] = 5;
+			food25--;
+		}
+		food_remain--;
+	}
+}
+
 // get empty cell
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
@@ -177,11 +215,13 @@ function Draw() {
 				}
 				
 
-			} else if (board[i][j] == 1) { // sweets
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = color5Point; //color
-				context.fill();
+			} else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
+				// context.beginPath();
+	            // context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				// context.fillStyle = color5Point;
+				// context.fill();
+				DrowDiffFood(board[i][j],center.x,center.y);
+			
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
@@ -192,7 +232,20 @@ function Draw() {
 	}
 }
 
-	
+function DrowDiffFood(num,x,y){
+	context.beginPath();
+	context.arc(x, y, 15, 0, 2 * Math.PI); // circle
+	if(num==1){
+		context.fillStyle = color5Point;
+	}
+	else if(num==3){
+		context.fillStyle = color15Point;
+	}
+	else if(num===5){
+		context.fillStyle = color25Point;
+	}
+	context.fill();
+}
 
 function DrawBody(startAngle,endAngle,center_x,center_y){
 	start = startAngle;
