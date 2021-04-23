@@ -3,6 +3,7 @@ var shape = new Object();
 var monsterList =[];
 var board;
 var score;
+var lifeGame=5;
 var pac_color;
 var start_time;
 var timeGame;
@@ -37,10 +38,12 @@ $(document).ready(function() {
 	//Start();
 });
 function initial() {
-	// document.getElementById("logo").style.display = "block";
-	// document.getElementById("register").style.display = "block";
-	// document.getElementById("login").style.display = "block";
 	switchToWelcome();
+}
+
+function newGame(){
+	updateForNewGame();
+	switchTosettings();
 }
 
 function EmptyCellForMonster(){
@@ -84,15 +87,17 @@ function Start() {
 	// var food_remain = 50;//num of sweets on board
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
-	monstersLoc = EmptyCellForMonster()
+	// monstersLoc = EmptyCellForMonster()
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) { //obstacles
+
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
-			else if  (
+			 else if  (
+
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
@@ -134,14 +139,7 @@ function Start() {
 			}
 		}
 	}
-	// food_remain= food_remain-food5-food15;
 	setFoodRemaine();
-	// while (food_remain > 0) {//all remain sweets
-	// 	var emptyCell = findRandomEmptyCell(board);
-	// 	board[emptyCell[0]][emptyCell[1]] = 1;
-	// 	food_remain--;
-	// }
-	// setFoodRemaine();
 	//click
 	keysDown = {};
 	addEventListener(
@@ -163,6 +161,7 @@ function Start() {
 }
 
 function setFoodRemaine(){
+	//food_remain= food_remain-food5-food25-food15;
 	while (food_remain > 0) {//all remain sweets
 		var emptyCell = findRandomEmptyCell(board);
 		if(food5>0){
@@ -216,6 +215,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblPlayerName.value = document.getElementById("username").value;;
+	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
 
@@ -257,11 +257,7 @@ function Draw() {
 				}
 				
 			} else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
-				// context.beginPath();
-	            // context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				// context.fillStyle = color5Point;
-				// context.fill();
-				DrowDiffFood(board[i][j],center.x,center.y);
+				DrawDiffFood(board[i][j],center.x,center.y);
 			
 
 			} else if (board[i][j] == 4) { // walls
@@ -280,7 +276,7 @@ function Draw() {
 	}
 }
 
-function DrowDiffFood(num,x,y){
+function DrawDiffFood(num,x,y){
 	context.beginPath();
 	context.arc(x, y, 15, 0, 2 * Math.PI); // circle
 	if(num==1){
@@ -342,7 +338,13 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
-		score++;
+		score= score+5;
+	}
+	if (board[shape.i][shape.j] == 3) {
+		score= score+15;
+	}
+	if (board[shape.i][shape.j] ==5) {
+		score= score+25;
 	}
 	//if (board[shape.i][shape.j] == monster) { //monster cell
 	//	game over? score status....;
@@ -354,10 +356,10 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("TTTTTime");
 	}
-	if (score >= 20 && time_elapsed <= 10) {
+	if (score >= 80 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+	if (score == 100) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
