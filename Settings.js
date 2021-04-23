@@ -78,7 +78,7 @@ function randomSettings(){
     kindOfFood();
     timeGame= Math.floor(Math.random()*100)+60;
     numOfManster = Math.floor(Math.random()*(4-1))+1;
-
+    // alert(numOfManster);
     color5Point = getRandomColor();
     color15Point = getRandomColor();
     color25Point = getRandomColor();

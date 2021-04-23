@@ -21,18 +21,6 @@ function switchToGame(){
     $('#pForchoosetime').hide();
     $('#pForchoosemanster').hide();
     readOnlyStettings();
-
-    // $('#settingsbutton').children().hide();
-    // .css("flex", 0);
-    // .animate({left: "300px"}); 
-    // $( "#settings_window" ).position({
-    //     my: "right center",
-    //     at: "right bottom",
-    //     of: "#windows"
-    //   });
-    // $('#randomSettings').click(function() {
-    //     $(this).hide();
-    // });
     Start();
 }
 
