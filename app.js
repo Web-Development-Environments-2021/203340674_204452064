@@ -10,7 +10,7 @@ var timeGame;
 var time_elapsed;
 var time_remain = timeGame;
 var interval;
-var interval2;
+var intervalMonster;
 var upKey=38;
 var downKey=40;
 var rightKey=39;
@@ -87,7 +87,7 @@ function Start() {
 	// var food_remain = 50;//num of sweets on board
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
-	// monstersLoc = EmptyCellForMonster()
+	monstersLoc = EmptyCellForMonster()
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -96,7 +96,7 @@ function Start() {
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
-			 else if  (
+			else if  (
 
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
@@ -157,7 +157,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-	interval2 =setInterval(UpdatePositionMonsters,270);
+	intervalMonster =setInterval(UpdatePositionMonsters,600);
 }
 
 function setFoodRemaine(){
@@ -346,13 +346,38 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] ==5) {
 		score= score+25;
 	}
-	//if (board[shape.i][shape.j] == monster) { //monster cell
-	//	game over? score status....;
+	//pac on monster
+	// if (board[shape.i][shape.j] == 6) {
+		
+	// 	if (lifeGame != 0) {
+	// 		lifeGame = lifeGame -1;
+	// 		if(score-10 < 0)
+	// 		{
+	// 			score =0;
+	// 		}
+	// 		else
+	// 		{
+	// 			score = score - 10;
+	// 		}
+	// 		monstersLoc = EmptyCellForMonster()
+			
+		
+	// 	}
+		
+	// 	window.clearInterval(intervalMonster)
+	// 	window.clearInterval(interval);
+	// 	alert("be careful")
+	// 	//update monster from start
+	// 	//update pac from start
+	// 	Start()
+
+	//  }
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = timeGame - time_elapsed;
 	if( time_remain <= 0){
+		window.clearInterval(intervalMonster)
 		window.clearInterval(interval);
 		window.alert("TTTTTime");
 	}
@@ -360,13 +385,12 @@ function UpdatePosition() {
 		pac_color = "green";
 	}
 	if (score == 100) {
+		window.clearInterval(intervalMonster)
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
 		
-		Draw();
-		
-		
+		Draw();	
 	}
 }
 function UpdatePositionMonsters()
@@ -383,9 +407,9 @@ function UpdatePositionMonsters()
 	{
 		minDis = Math.sqrt(9*9 + 9*9);
 		minDir;
-		if(monsterList[ind].j > 0 && board[monsterList[ind].i][monsterList[ind].j - 1] != 4) //no wall in left
+		if(monsterList[ind].j > 0 && board[monsterList[ind].i][(monsterList[ind].j) - 1] != 4) //no wall in left
 		{
-			if(board[monsterList[ind].i][monsterList[ind].j - 1] != 6) // no monster in left
+			if(board[monsterList[ind].i][(monsterList[ind].j) - 1] != 6) // no monster in left
 			{
 				monX = monsterList[ind].i;
 				monY = monsterList[ind].j-1
@@ -398,7 +422,7 @@ function UpdatePositionMonsters()
 	
 			}
 		}
-		if(monsterList[ind].i > 0 && board[monsterList[ind].i - 1][monsterList[ind].j] != 4) // no walls up 
+		if(monsterList[ind].i > 0 && board[(monsterList[ind].i) - 1][monsterList[ind].j] != 4) // no walls up 
 		{
 			if(board[monsterList[ind].i-1][monsterList[ind].j] != 6) // no monster up
 			{
@@ -412,9 +436,9 @@ function UpdatePositionMonsters()
 				}			
 			}
 		}
-		if(monsterList[ind].j < 9 && board[monsterList[ind].i][monsterList[ind].j + 1] != 4)//no walls right 
+		if(monsterList[ind].j < 9 && board[monsterList[ind].i][(monsterList[ind].j) + 1] != 4)//no walls right 
 		{
-			if(board[monsterList[ind].i][monsterList[ind].j+1] != 6) // no monster right
+			if(board[monsterList[ind].i][(monsterList[ind].j)+1] != 6) // no monster right
 			{
 				monX = monsterList[ind].i;
 				monY = monsterList[ind].j+1;
@@ -426,10 +450,9 @@ function UpdatePositionMonsters()
 				}			
 
 			}
-		}
+		}		
 		
-		
-		if (monsterList[ind].i < 9 && board[monsterList[ind].i + 1][monsterList[ind].j] != 4) //no walls down
+		if (monsterList[ind].i < 9 && board[(monsterList[ind].i) + 1][monsterList[ind].j] != 4) //no walls down
 		{	
 			if(board[monsterList[ind].i+1][monsterList[ind].j] != 6) // no monster down
 			{
