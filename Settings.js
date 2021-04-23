@@ -67,7 +67,7 @@ function chooseNumOfmanster(){
     alert("befor");
     let mansterInput = document.getElementById("numOfMansterIn").value;
     if(mansterInput<=4 && mansterInput>=1){
-        NumOfManster= mansterInput;
+        numOfManster= mansterInput;
         alert("after");
     }
     else{
@@ -79,7 +79,7 @@ function randomSettings(){
     food_remain = Math.floor(Math.random()*(90-50))+50;
     kindOfFood();
     timeGame= Math.floor(Math.random()*100)+60;
-    NumOfManster = Math.floor(Math.random()*(4-1));
+    numOfManster = Math.floor(Math.random()*(4-1))+1;
     color5Point = getRandomColor();
     color15Point = getRandomColor();
     color25Point = getRandomColor();
