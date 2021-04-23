@@ -23,6 +23,7 @@ var color5Point;
 var color15Point;
 var color25Point;
 var numOfManster;
+var pizza;
 var direction;
 var start = 0.15;
 var end = 1.85;
@@ -44,7 +45,8 @@ function initial() {
 
 function newGame(){
 	updateForNewGame();
-	switchTosettings();
+	// soundGame.stop();
+	switchTosettings();	
 }
 
 function EmptyCellForMonster(){
@@ -97,15 +99,13 @@ function removeMonsterFromLastRound(){
 		}
 
 function Start() {
-	//initial score&time
-	// document.getElementById("game_window").style.display = "block";
+	//initial score&time	
 	board = new Array();
-	// soundGame = new sound("C:/Users/שי/Downloads/test.mp3");
+	// soundGame = new sound("test.mp3");
 	// soundGame.play();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;//num of cells
-	// var food_remain = 50;//num of sweets on board
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
 	monstersLoc = EmptyCellForMonster()
@@ -564,5 +564,9 @@ function UpdatePositionMonsters()
 		board[row][col] = 6;
 		
 	}
+}
+
+function UpdatePostionpizza(){
+	
 }
 
