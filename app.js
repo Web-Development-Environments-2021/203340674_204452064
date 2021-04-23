@@ -92,7 +92,7 @@ function Start() {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) { //obstacles
-
+			
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
@@ -157,8 +157,10 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
+
 	intervalMonster =setInterval(UpdatePositionMonsters,600);
 }
+
 
 function setFoodRemaine(){
 	//food_remain= food_remain-food5-food25-food15;
@@ -218,7 +220,6 @@ function Draw() {
 	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
-
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
@@ -232,8 +233,8 @@ function Draw() {
 				
 				if(direction == 2) //up
 				{
-					DrawBody(1.7,1.3,center_x,center_y)
-					DrawEye(14,2,center_x,center_y);
+				DrawBody(1.7,1.3,center_x,center_y)
+				DrawEye(14,2,center_x,center_y);
 
 				}
 				else if(direction == 1){//left
@@ -256,10 +257,11 @@ function Draw() {
 				
 				}
 				
+
+
 			} else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
 				DrawDiffFood(board[i][j],center.x,center.y);
 			
-
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
@@ -269,7 +271,7 @@ function Draw() {
 			else if(board[i][j] == 6 ){ //monster
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
-				context.fillStyle = "red"; //color
+				context.fillStyle = "black"; //color
 				context.fill();
 			}
 		}
@@ -316,6 +318,7 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	direction = x;
+	
 	if (x == 2) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) { //left
 			shape.j--;
@@ -390,6 +393,7 @@ function UpdatePosition() {
 		window.alert("Game completed");
 	} else {
 		
+
 		Draw();	
 	}
 }
@@ -509,3 +513,4 @@ function UpdatePositionMonsters()
 		
 	}
 }
+
