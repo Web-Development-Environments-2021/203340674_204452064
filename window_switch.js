@@ -12,8 +12,31 @@ function switchToRegister(){
 function switchToGame(){
     $('#windows').children().hide();
     $('#game_window').show();
+    $("#settings_window").show();
+    $('#settingsbutton').hide();
+    $('#randombutton').hide();
+    $('#pForchooseKey').hide();
+    $('#pForchooseBalls').hide();
+    $('#pForchoosecolor').hide();
+    $('#pForchoosetime').hide();
+    $('#pForchoosemanster').hide();
+    readOnlyStettings();
+
+    // $('#settingsbutton').children().hide();
+    // .css("flex", 0);
+    // .animate({left: "300px"}); 
+    // $( "#settings_window" ).position({
+    //     my: "right center",
+    //     at: "right bottom",
+    //     of: "#windows"
+    //   });
+    // $('#randomSettings').click(function() {
+    //     $(this).hide();
+    // });
     Start();
 }
+
+
 
 function switchToWelcome(){
     $('#windows').children().hide();
@@ -34,10 +57,6 @@ function switchDialogAboout(){
     {
         $('#modal-dialog').hide()
     })
-
-    
-    
-
 }
 
 
