@@ -75,7 +75,25 @@ function checkIfMonsterCell(monsterLoc,i,j){
 	}
 	return false;
 }
+function removeMonsterFromLastRound(){
+	var row;
+	var col;
+	for (var ind = 0; ind < monsterList.length; ind++)
+	{
+		row = monsterList[ind].i;
+		col = monsterList[ind].j;
+		if (monsterOnsweets[ind])
+		{
+			board[row][col] = 1;
+		}
+		else
+		{
+			board[row][col]=0;
+		}
 
+
+	}
+		}
 
 function Start() {
 	//initial score&time
@@ -92,7 +110,7 @@ function Start() {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) { //obstacles
-			
+
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
@@ -158,7 +176,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 
-	intervalMonster =setInterval(UpdatePositionMonsters,600);
+		intervalMonster =setInterval(UpdatePositionMonsters,600);
 }
 
 
@@ -233,8 +251,8 @@ function Draw() {
 				
 				if(direction == 2) //up
 				{
-				DrawBody(1.7,1.3,center_x,center_y)
-				DrawEye(14,2,center_x,center_y);
+					DrawBody(1.7,1.3,center_x,center_y)
+					DrawEye(14,2,center_x,center_y);
 
 				}
 				else if(direction == 1){//left
@@ -256,7 +274,7 @@ function Draw() {
 					DrawEye(eyeX,eyeY,center_x,center_y);
 				
 				}
-				
+	
 
 
 			} else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
@@ -271,7 +289,7 @@ function Draw() {
 			else if(board[i][j] == 6 ){ //monster
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = "red"; //color
 				context.fill();
 			}
 		}
@@ -318,7 +336,7 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	direction = x;
-	
+
 	if (x == 2) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) { //left
 			shape.j--;
@@ -350,31 +368,37 @@ function UpdatePosition() {
 		score= score+25;
 	}
 	//pac on monster
-	// if (board[shape.i][shape.j] == 6) {
+	if (board[shape.i][shape.j] == 6) 
+	{
 		
-	// 	if (lifeGame != 0) {
-	// 		lifeGame = lifeGame -1;
-	// 		if(score-10 < 0)
-	// 		{
-	// 			score =0;
-	// 		}
-	// 		else
-	// 		{
-	// 			score = score - 10;
-	// 		}
-	// 		monstersLoc = EmptyCellForMonster()
-			
-		
-	// 	}
-		
-	// 	window.clearInterval(intervalMonster)
-	// 	window.clearInterval(interval);
-	// 	alert("be careful")
-	// 	//update monster from start
-	// 	//update pac from start
-	// 	Start()
+		if (lifeGame != 0) 
+		{
+			lifeGame = lifeGame -1;
+			if(score-10 < 0)
+			{
+				score = 0;
+			}
+			else
+			{
+				score = score - 10;
+			}
+			//update monster from start
+			removeMonsterFromLastRound()
+			monstersLoc = EmptyCellForMonster();
+			locateMonster(monstersLoc);
 
-	//  }
+			shape.i = findRandomEmptyCell(board)[0] ;
+			shape.j = findRandomEmptyCell(board)[1] ;
+
+					
+		}
+		else //live is over
+		{
+			alert("game over");
+			window.clearInterval(intervalMonster);
+			window.clearInterval(interval);
+		}
+	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
@@ -397,6 +421,17 @@ function UpdatePosition() {
 		Draw();	
 	}
 }
+function locateMonster(monsterLoc)
+{
+	monsterOnsweets=[false,false,false,false];
+	for (var mon = 0; mon < monsterLoc.length; mon++)
+	{
+		var i = monsterLoc[mon][0];
+		var j = monsterLoc[mon][1];
+		board[i][j] = 6;
+	}
+}
+
 function UpdatePositionMonsters()
 {
 	var pacX = shape.i;
@@ -410,7 +445,7 @@ function UpdatePositionMonsters()
 	for (var ind = 0; ind < monsterList.length; ind++)
 	{
 		minDis = Math.sqrt(9*9 + 9*9);
-		minDir;
+		minDir =5;
 		if(monsterList[ind].j > 0 && board[monsterList[ind].i][(monsterList[ind].j) - 1] != 4) //no wall in left
 		{
 			if(board[monsterList[ind].i][(monsterList[ind].j) - 1] != 6) // no monster in left
@@ -501,9 +536,10 @@ function UpdatePositionMonsters()
 			monsterList[ind].j++;
 			
 		}
-		else//(minDir == 4)
+		if (minDir == 4)
 		{
-			if(board[monsterList[ind].i++][monsterList[ind].j] == 1){
+			if(board[monsterList[ind].i++][monsterList[ind].j] == 1)
+			{
 				monsterOnsweets[ind] = true;
 			}
 			monsterList[ind].i++;
