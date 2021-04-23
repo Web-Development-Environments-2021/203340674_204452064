@@ -545,11 +545,6 @@ function UpdatePositionMonsters()
 			monsterList[ind].i++;
 			
 		}
-		if(minDir == 5) // was wall and monster = monster cant move
-		{
-			
-
-		}
 		board[monsterList[ind].i][monsterList[ind].j] = 6;
 		
 	}
