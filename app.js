@@ -179,7 +179,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 
-		intervalMonster =setInterval(UpdatePositionMonsters,600);
+	intervalMonster =setInterval(UpdatePositionMonsters,250);
 }
 
 
@@ -434,7 +434,8 @@ function locateMonster(monsterLoc)
 		board[i][j] = 6;
 	}
 }
-
+// this function check if monster can move to one from 4 direction
+// cant move when exist wall or if exist other monster
 function UpdatePositionMonsters()
 {
 	var pacX = shape.i;
@@ -447,29 +448,30 @@ function UpdatePositionMonsters()
 	
 	for (var ind = 0; ind < monsterList.length; ind++)
 	{
+		var row = monsterList[ind].i;
+		var col = monsterList[ind].j;
 		minDis = Math.sqrt(9*9 + 9*9);
-		minDir =5;
-		if(monsterList[ind].j > 0 && board[monsterList[ind].i][(monsterList[ind].j) - 1] != 4) //no wall in left
+		minDir = 5;
+		if(col > 0 && board[row][col - 1] != 4) //no wall in left
 		{
-			if(board[monsterList[ind].i][(monsterList[ind].j) - 1] != 6) // no monster in left
+			if(board[row][col - 1] != 6) // no monster in left
 			{
-				monX = monsterList[ind].i;
-				monY = monsterList[ind].j-1
+				monX = row;
+				monY = col-1
 				currDis = Math.sqrt(Math.pow(monX - pacX,2) + Math.pow(monY - pacY,2));
 				if(currDis<=minDis)
 				{
 					minDis = currDis;
 					minDir = 1
 				}
-	
 			}
 		}
-		if(monsterList[ind].i > 0 && board[(monsterList[ind].i) - 1][monsterList[ind].j] != 4) // no walls up 
+		if(row > 0 && board[row - 1][col] != 4) // no walls up 
 		{
-			if(board[monsterList[ind].i-1][monsterList[ind].j] != 6) // no monster up
+			if(board[row-1][col] != 6) // no monster up
 			{
-				monX = monsterList[ind].i - 1;
-				monY = monsterList[ind].j;
+				monX = row - 1;
+				monY = col;
 				currDis = Math.sqrt(Math.pow(monX - pacX,2) + Math.pow(monY - pacY,2));
 				if(currDis<=minDis)
 				{
@@ -478,12 +480,12 @@ function UpdatePositionMonsters()
 				}			
 			}
 		}
-		if(monsterList[ind].j < 9 && board[monsterList[ind].i][(monsterList[ind].j) + 1] != 4)//no walls right 
+		if(col < 9 && board[row][col + 1] != 4)//no walls right 
 		{
-			if(board[monsterList[ind].i][(monsterList[ind].j)+1] != 6) // no monster right
+			if(board[row][col+1] != 6) // no monster right
 			{
-				monX = monsterList[ind].i;
-				monY = monsterList[ind].j+1;
+				monX = row;
+				monY = col+1;
 				currDis = Math.sqrt(Math.pow(monX - pacX,2) + Math.pow(monY - pacY,2));
 				if(currDis<=minDis)
 				{
@@ -494,12 +496,12 @@ function UpdatePositionMonsters()
 			}
 		}		
 		
-		if (monsterList[ind].i < 9 && board[(monsterList[ind].i) + 1][monsterList[ind].j] != 4) //no walls down
+		if (row < 9 && board[row + 1][col] != 4) //no walls down
 		{	
-			if(board[monsterList[ind].i+1][monsterList[ind].j] != 6) // no monster down
+			if(board[row+1][col] != 6) // no monster down
 			{
-				monX = monsterList[ind].i+1;
-				monY = monsterList[ind].j;
+				monX = row+1;
+				monY = col;
 				currDis = Math.sqrt(Math.pow(monX - pacX,2) + Math.pow(monY - pacY,2));
 				if(currDis<=minDis)
 				{
@@ -510,45 +512,56 @@ function UpdatePositionMonsters()
 		}
 		
 		
-		if(monsterOnsweets[ind]){ // monster was on sweet and need to return sweet
-			board[monsterList[ind].i][monsterList[ind].j]=1;
+		if(monsterOnsweets[ind]){ // monster was on sweet and need to return the sweet
+			board[row][col]=1;
 		}
-		else{board[monsterList[ind].i][monsterList[ind].j]=0;}
+		else{board[row][col]=0;} //empty call
 		
 		if(minDir==1)
 		{
-			if(board[monsterList[ind].i][monsterList[ind].j--] == 1){
+			if(board[row][col-1] == 1){
 				monsterOnsweets[ind] = true;
 			}
+			else{//wasnt sweets before
+				monsterOnsweets[ind] =false;}
 			monsterList[ind].j--;
 			
 		}
 		else if(minDir==2)
 		{
-			if(board[monsterList[ind].i--][monsterList[ind].j] == 1){
+			if(board[row-1][col] == 1){
 				monsterOnsweets[ind] = true;
 			}
+			else{//wasnt sweets before
+				monsterOnsweets[ind] =false;}
 			monsterList[ind].i--;
 			
 		}
 		else if(minDir==3)
 		{
-			if(board[monsterList[ind].i][monsterList[ind].j++] == 1){
+			if(board[row][col+1] == 1){
 				monsterOnsweets[ind] = true;
 			}
+			else{//wasnt sweets before
+				monsterOnsweets[ind] =false;}
 			monsterList[ind].j++;
 			
 		}
 		if (minDir == 4)
 		{
-			if(board[monsterList[ind].i++][monsterList[ind].j] == 1)
+			if(board[row+1][col] == 1)
 			{
 				monsterOnsweets[ind] = true;
 			}
+			else{//wasnt sweets before
+				monsterOnsweets[ind] =false;}
 			monsterList[ind].i++;
 			
 		}
-		board[monsterList[ind].i][monsterList[ind].j] = 6;
+		
+		row = monsterList[ind].i;
+		col = monsterList[ind].j;
+		board[row][col] = 6;
 		
 	}
 }
