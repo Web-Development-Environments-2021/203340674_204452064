@@ -66,6 +66,7 @@ function chooseNumOfmanster(){
     let mansterInput = document.getElementById("numOfMansterIn").value;
     if(mansterInput<=4 && mansterInput>=1){
         numOfManster= mansterInput;
+
     }
     else{
         alert("insert between 1-4");
@@ -77,7 +78,7 @@ function randomSettings(){
     kindOfFood();
     timeGame= Math.floor(Math.random()*100)+60;
     numOfManster = Math.floor(Math.random()*(4-1))+1;
-    alert(numOfManster+"manser");
+
     color5Point = getRandomColor();
     color15Point = getRandomColor();
     color25Point = getRandomColor();
