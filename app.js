@@ -3,7 +3,7 @@ var shape = new Object();
 var monsterList =[];
 var board;
 var score;
-var lifeGame=5;
+var lifeGame;
 var pac_color;
 var start_time;
 var timeGame;
@@ -103,6 +103,7 @@ function Start() {
 	board = new Array();
 	// soundGame = new sound("test.mp3");
 	// soundGame.play();
+	lifeGame=5;
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;//num of cells
@@ -126,7 +127,11 @@ function Start() {
 				(i == 6 && j == 2)
 			) {
 				board[i][j] = 4;
-			} else {
+			 }
+			else if(i==4 && j==4){
+				board[i][j] = 7
+			} 
+			else {
 				
 				var randomNum = Math.random();
 				// if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
@@ -246,6 +251,7 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
+			
 			if (board[i][j] == 2) { // packman	
 				var center_x = center.x;
 				var center_y = center.y;
@@ -274,13 +280,16 @@ function Draw() {
 				}
 				else{
 					DrawBody(start,end,center_x,center_y);
-					DrawEye(eyeX,eyeY,center_x,center_y);
-				
+					DrawEye(eyeX,eyeY,center_x,center_y);				
 				}
-	
-
-
-			} else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
+			} 
+			else if(board[i][j]==7){ //pizza
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
 				DrawDiffFood(board[i][j],center.x,center.y);
 			
 			} else if (board[i][j] == 4) { // walls
