@@ -29,6 +29,7 @@ var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[false,false,false,false];
+var soundGame;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -99,6 +100,8 @@ function Start() {
 	//initial score&time
 	// document.getElementById("game_window").style.display = "block";
 	board = new Array();
+	// soundGame = new sound("C:/Users/שי/Downloads/test.mp3");
+	// soundGame.play();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;//num of cells
