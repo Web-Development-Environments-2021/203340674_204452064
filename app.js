@@ -29,7 +29,7 @@ var start = 0.15;
 var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
-var monsterOnsweets=[false,false,false,false];
+var monsterOnsweets=[0,0,0,0];
 var soundGame;
 
 $(document).ready(function() {
@@ -85,9 +85,9 @@ function removeMonsterFromLastRound(){
 	{
 		row = monsterList[ind].i;
 		col = monsterList[ind].j;
-		if (monsterOnsweets[ind])
+		if (monsterOnsweets[ind]!= 0)
 		{
-			board[row][col] = 1;
+			board[row][col] = monsterOnsweets[ind];
 		}
 		else
 		{
@@ -184,7 +184,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 
-	intervalMonster =setInterval(UpdatePositionMonsters,450);
+	//intervalMonster =setInterval(UpdatePositionMonsters,250);
 }
 
 
@@ -384,58 +384,11 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] ==5) {
 		score= score+25;
 	}
+	UpdatePositionMonsters()
 	//pac on monster
 	if (board[shape.i][shape.j] == 6) 
 	{
-		
-		if (lifeGame != 0) 
-		{
-			lifeGame = lifeGame -1;
-			if(score-10 < 0)
-			{
-				score = 0;
-			}
-			else
-			{
-				score = score - 10;
-			}
-			//update monster from start
-			removeMonsterFromLastRound()
-			monstersLoc = EmptyCellForMonster();
-			locateMonster(monstersLoc);
-
-			shape.i = findRandomEmptyCell(board)[0] ;
-			shape.j = findRandomEmptyCell(board)[1] ;
-
-			document.getElementById("alarmmsg").innerHTML = msg;
-
-			setTimeout(function(){
-    		document.getElementById("alarmmsg").innerHTML = '';
-			}, 3000);
-			
-
-			// $( document ).ready(function(){
-			// 	$('#message').fadeIn('slow', function(){
-			// 	   $('#message').delay(5000).fadeOut(); 
-			// 	});
-			// });
-
-			var cuurTime = new Date().getTime();
-			while(cuurTime + 1000 >= new Date().getTime()){				
-				//document.getElementById('myElem').style.visibility='visible';				
-			}
-			//document.getElementById('myElem').style.visibility='hidden';
-			
-
-
-					
-		}
-		else //live is over
-		{
-			alert("game over");
-			window.clearInterval(intervalMonster);
-			window.clearInterval(interval);
-		}
+		rejection()	
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
@@ -449,7 +402,7 @@ function UpdatePosition() {
 	if (score >= 80 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 100) {
+	if (score == 1000) {
 		window.clearInterval(intervalMonster)
 		window.clearInterval(interval);
 		window.alert("Game completed");
@@ -459,7 +412,7 @@ function UpdatePosition() {
 }
 function locateMonster(monsterLoc)
 {
-	monsterOnsweets=[false,false,false,false];
+	monsterOnsweets=[0,0,0,0];
 	for (var mon = 0; mon < monsterLoc.length; mon++)
 	{
 		var i = monsterLoc[mon][0];
@@ -485,6 +438,7 @@ function UpdatePositionMonsters()
 		var col = monsterList[ind].j;
 		minDis = Math.sqrt(9*9 + 9*9);
 		minDir = 5;
+		
 		if(col > 0 && board[row][col - 1] != 4) //no wall in left
 		{
 			if(board[row][col - 1] != 6) // no monster in left
@@ -545,49 +499,31 @@ function UpdatePositionMonsters()
 		}
 		
 		
-		if(monsterOnsweets[ind]){ // monster was on sweet and need to return the sweet
-			board[row][col]=1;
-		}
-		else{board[row][col]=0;} //empty call
+		
+	
+		whichObject(row,col,ind); //save the object was
 		
 		if(minDir==1)
 		{
-			if(board[row][col-1] == 1){
-				monsterOnsweets[ind] = true;
-			}
-			else{//wasnt sweets before
-				monsterOnsweets[ind] =false;}
+			monsterOnsweets[ind] = board[row][col-1];		
 			monsterList[ind].j--;
 			
 		}
 		else if(minDir==2)
 		{
-			if(board[row-1][col] == 1){
-				monsterOnsweets[ind] = true;
-			}
-			else{//wasnt sweets before
-				monsterOnsweets[ind] =false;}
+			monsterOnsweets[ind] = board[row-1][col];
 			monsterList[ind].i--;
 			
 		}
 		else if(minDir==3)
 		{
-			if(board[row][col+1] == 1){
-				monsterOnsweets[ind] = true;
-			}
-			else{//wasnt sweets before
-				monsterOnsweets[ind] =false;}
+			monsterOnsweets[ind] = board[row][col+1];
 			monsterList[ind].j++;
 			
 		}
 		if (minDir == 4)
 		{
-			if(board[row+1][col] == 1)
-			{
-				monsterOnsweets[ind] = true;
-			}
-			else{//wasnt sweets before
-				monsterOnsweets[ind] =false;}
+			monsterOnsweets[ind] = board[row+1][col];
 			monsterList[ind].i++;
 			
 		}
@@ -596,8 +532,46 @@ function UpdatePositionMonsters()
 		col = monsterList[ind].j;
 		board[row][col] = 6;
 		
+		
 	}
 }
+
+
+function rejection(){
+	if (lifeGame != 0) 
+		{
+			lifeGame = lifeGame -1;
+			if(score-10 < 0)
+			{
+				score = 0;
+			}
+			else
+			{
+				score = score - 10;
+			}
+			//update monster from start
+			removeMonsterFromLastRound()
+			monstersLoc = EmptyCellForMonster();
+			locateMonster(monstersLoc);
+
+			shape.i = findRandomEmptyCell(board)[0] ;
+			shape.j = findRandomEmptyCell(board)[1] ;
+
+			var cuurTime = new Date().getTime();
+			while(cuurTime + 2000 >= new Date().getTime()){				
+				//document.getElementById('myElem').style.visibility='visible';				
+			}
+			//document.getElementById('myElem').style.visibility='hidden';
+					
+		}
+		else //live is over
+		{
+			alert("game over");
+			window.clearInterval(intervalMonster);
+			window.clearInterval(interval);
+		}
+	
+
 function checkAllDir(i,j){
 	if(board[i+1][j]!=0 && board[i-1][j]!=0 && board[i][j-1] !=0 && board[i][j+1]!=0){
 		return false;
@@ -642,4 +616,15 @@ function UpdatePostionpizza(i, j){
 	}
 	return listReturn;
 }
+//check if curr cell included food - for return when monster pass else put in cell value 0
+function whichObject(i,j,monInd){
+	var foods = [1,3,5,7];
+	if(foods.includes(monsterOnsweets[monInd])){
+		board[i][j] = monsterOnsweets[monInd];
+	}
+	else{
+		board[i][j] =0;
+	}
+}
+
 
