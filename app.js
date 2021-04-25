@@ -179,7 +179,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 
-	intervalMonster =setInterval(UpdatePositionMonsters,250);
+	intervalMonster =setInterval(UpdatePositionMonsters,450);
 }
 
 
@@ -393,6 +393,27 @@ function UpdatePosition() {
 			shape.i = findRandomEmptyCell(board)[0] ;
 			shape.j = findRandomEmptyCell(board)[1] ;
 
+			document.getElementById("alarmmsg").innerHTML = msg;
+
+			setTimeout(function(){
+    		document.getElementById("alarmmsg").innerHTML = '';
+			}, 3000);
+			
+
+			// $( document ).ready(function(){
+			// 	$('#message').fadeIn('slow', function(){
+			// 	   $('#message').delay(5000).fadeOut(); 
+			// 	});
+			// });
+
+			var cuurTime = new Date().getTime();
+			while(cuurTime + 1000 >= new Date().getTime()){				
+				//document.getElementById('myElem').style.visibility='visible';				
+			}
+			//document.getElementById('myElem').style.visibility='hidden';
+			
+
+
 					
 		}
 		else //live is over
@@ -419,8 +440,6 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
-		
-
 		Draw();	
 	}
 }
