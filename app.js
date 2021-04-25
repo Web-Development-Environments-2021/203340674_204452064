@@ -134,10 +134,6 @@ function Start() {
 			else {
 				
 				var randomNum = Math.random();
-				// if (randomNum <= (1.0 * food_remain) / cnt) { // put sweets
-				// 	food_remain--;
-				// 	board[i][j] = 1;
-				// }
 				if (randomNum <= (1.0 * food5) / cnt) { // put sweets
 					board[i][j] = 1;
 					food5--;
@@ -153,7 +149,7 @@ function Start() {
 					food_remain--;
 					board[i][j] = 5;
 				}
-				else if ((randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) && pacman_remain>0) {
+				else if ((randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) && pacman_remain>0 && (i>1 && i<8)) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
@@ -184,7 +180,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 
-	//intervalMonster =setInterval(UpdatePositionMonsters,250);
+	intervalMonster =setInterval(UpdatePositionMonsters,350);
 }
 
 
@@ -309,6 +305,7 @@ function Draw() {
 				context.fillStyle = "red"; //color
 				context.fill();
 			}
+			
 		}
 	}
 }
@@ -384,13 +381,17 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] ==5) {
 		score= score+25;
 	}
-	UpdatePositionMonsters()
-	//pac on monster
-	if (board[shape.i][shape.j] == 6) 
-	{
-		rejection()	
+	// UpdatePositionMonsters()
+
+	//monster one step from pac
+	if (pacCloseToMonster()){
+		rejection()
+		
 	}
-	board[shape.i][shape.j] = 2;
+	else{
+		board[shape.i][shape.j] = 2;
+	}
+	
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = timeGame - time_elapsed;
@@ -409,6 +410,15 @@ function UpdatePosition() {
 	} else {
 		Draw();	
 	}
+}
+function pacCloseToMonster(){
+	for (var ind=0; ind<monsterList.length; ind++){
+		if(Math.abs(shape.i - monsterList[ind].i) < 1 && Math.abs(shape.j - monsterList[ind].j) < 1){
+			return true;
+		}
+	}
+	return false;
+
 }
 function locateMonster(monsterLoc)
 {
@@ -497,10 +507,6 @@ function UpdatePositionMonsters()
 				}			
 			}
 		}
-		
-		
-		
-	
 		whichObject(row,col,ind); //save the object was
 		
 		if(minDir==1)
@@ -532,10 +538,8 @@ function UpdatePositionMonsters()
 		col = monsterList[ind].j;
 		board[row][col] = 6;
 		
-		
 	}
 }
-
 
 function rejection(){
 	if (lifeGame != 0) 
@@ -553,7 +557,7 @@ function rejection(){
 			removeMonsterFromLastRound()
 			monstersLoc = EmptyCellForMonster();
 			locateMonster(monstersLoc);
-
+			board[shape.i][shape.j] = 0;
 			shape.i = findRandomEmptyCell(board)[0] ;
 			shape.j = findRandomEmptyCell(board)[1] ;
 
@@ -570,6 +574,7 @@ function rejection(){
 			window.clearInterval(intervalMonster);
 			window.clearInterval(interval);
 		}
+	}
 	
 
 function checkAllDir(i,j){
@@ -626,5 +631,4 @@ function whichObject(i,j,monInd){
 		board[i][j] =0;
 	}
 }
-
 

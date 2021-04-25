@@ -3,6 +3,7 @@
 
 <head>
 	<script src="./jquery-3.4.1.slim.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./register.js"></script>
 	<script type="text/javascript" src="./login.js"></script>
@@ -20,6 +21,7 @@
 		<a id = "about" onclick = "switchDialogAboout()">About</a>
 	</div>
 	<div id = "windows" class="windows">
+	
 	<div id="first_window">
 		<div id="logo">
 			<img src="">
@@ -38,25 +40,24 @@
 
 
 	<div id="register_window">
-		<form id = "registerform" method="get">
-			<label for="name">Name</label>
-			<input type="text" name = "name" id ="name" >
-			<br>
-			<label for="password">Password</label>
-			<input type="password" name = "psw" id ="psw" >
-			<br>
-			<label for="fullname">FullName</label>
-			<input type="text" name = "fullname" id = "fullname">
-			<br>
-			<label for="email">Email</label>
-    		<input type="email" name="email" id="email" class="error" aria-invalid="true" >
-			<label id="email-error" class="error" for="email"></label>
+		<form id="register-form">
+			<div>
+				<input name="username" id = "username" placeholder="Name" type="text">
+			</div>
+			<div>
+				<input name="email" id = "email" placeholder="Email Address" type="text">
+			</div>
+			<div>
+				<input name="password" id="password" placeholder="Password" type="password">
+			</div>
+			<div>
+				<input name="fullname" id = "fullname" placeholder="Full name" type="text">
+			</div>
 			<br>
 			<label for="birthday">Birthday:</label> 
 			<input type="date" id="birthday" name="birthday">
 			<br>
-			<button id="regbutton" onclick="addUser()"></button>Register</button>
-			<br>	
+			<input class="btn btn-primary" id="submit-button" type="submit" value="Register" onclick="addUser()">		
 		</form>
 	</div>
 
@@ -100,10 +101,12 @@
 		autostart="true"/> --> 
 
 	</div>
+	
+	
 	<div id ="login_window">
 		<form>
 			<label for="name">Name</label>
-			<input type="text" name = "name" id ="username" required>
+			<input type="text" name = "name" id ="usernamelogin" required>
 			<br>
 			<label for="password">Password</label>
 			<input type="password" name = "psw" id ="psw_login" required>
@@ -112,6 +115,8 @@
 			<br>
 		</form>
 	</div>
+
+
 	<div id= "settings_window" class="settings_window">
 		<p id="pForchooseKey"><b>Settings page <br> please choose keys for the game:</b></p>
 		<label for="up">up Key</label>
@@ -164,6 +169,8 @@
 	<p>template uses.....</p>
 	<p>dificult...........</p>
 </dialog>
+
+
 	
 	
 
