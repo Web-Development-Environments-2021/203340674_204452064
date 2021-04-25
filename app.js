@@ -284,8 +284,13 @@ function Draw() {
 				}
 			} 
 			else if(board[i][j]==7){ //pizza
+				let pos = UpdatePostionpizza(i,j);
+				// alert(pos[0]);
+				// alert(pos[1]);
+				let xPos = pos[0] * 60 + 30;
+				let yPos = pos[1] * 60 + 30;
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
+				context.arc(xPos, yPos, 15, 0, 1.5 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
@@ -531,6 +536,7 @@ function UpdatePositionMonsters()
 	}
 }
 
+
 function rejection(){
 	if (lifeGame != 0) 
 		{
@@ -565,6 +571,50 @@ function rejection(){
 			window.clearInterval(interval);
 		}
 	
+
+function checkAllDir(i,j){
+	if(board[i+1][j]!=0 && board[i-1][j]!=0 && board[i][j-1] !=0 && board[i][j+1]!=0){
+		return false;
+	}
+	return true;
+}
+function UpdatePostionpizza(i, j){
+	let flag=true;
+	flag = checkAllDir(i,j);
+	let NewPos;
+	var listReturn=[i,j];
+	while(flag==true){
+		NewPos=Math.floor(Math.random()*(5-1))+1;
+		if(NewPos==1){//up
+			if(board[i+1][j]==0){
+				board[i+1][j]==7;
+				listReturn=[i+1,j];
+				flag= false;
+			}
+		}
+		else if(NewPos==2){ //down
+			if(board[i-1][j]==0){
+				board[i-1][j]==7;
+				listReturn=[i-1,j];
+				flag= false;
+			} 
+		}
+		else if(NewPos==3){//left
+			if(board[i][j-1]==0){
+				board[i][j-1]==7;
+				listReturn=[i,j-1];
+				flag= false;
+			}
+		}
+		else if(NewPos==4){//right
+			if(board[i][j+1]==0){
+				board[i][j+1]==7;
+				listReturn=[i,j+1];
+				flag=false;
+			}
+		}
+	}
+	return listReturn;
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
