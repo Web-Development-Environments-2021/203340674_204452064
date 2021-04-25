@@ -19,7 +19,7 @@ function checkInDatabase(user,pass){
 }
 
 function checkUserExist(){
-    let inputUser = document.getElementById("username").value;
+    let inputUser = document.getElementById("usernamelogin").value;
     let inputPass = document.getElementById("psw_login").value;
 
     if(checkInDatabase(inputUser,inputPass)){

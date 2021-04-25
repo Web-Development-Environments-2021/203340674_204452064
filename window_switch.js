@@ -45,7 +45,16 @@ function switchDialogAboout(){
     {
         $('#modal-dialog').hide()
     })
+    $(document).on('mousedown',function(e)
+    {
+            $('#modal-dialog').hide();
+        
+    })
+    
+
+
 }
+
 
 
 function switchTosettings(){
