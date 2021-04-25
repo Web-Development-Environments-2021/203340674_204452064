@@ -10,6 +10,7 @@ var timeGame;
 var time_elapsed;
 var time_remain = timeGame;
 var interval;
+var interval2;
 var intervalMonster;
 var upKey=38;
 var downKey=40;
@@ -31,6 +32,9 @@ var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
 var soundGame;
+// var xPos;
+// var yPos;
+
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -101,6 +105,7 @@ function removeMonsterFromLastRound(){
 function Start() {
 	//initial score&time	
 	board = new Array();
+	pizza= [4,4];
 	// soundGame = new sound("test.mp3");
 	// soundGame.play();
 	lifeGame=5;
@@ -183,8 +188,8 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-
-	//intervalMonster =setInterval(UpdatePositionMonsters,250);
+	interval2= setInterval(UpdatePostionpizza,500);
+	intervalMonster =setInterval(UpdatePositionMonsters,400);
 }
 
 
@@ -284,13 +289,10 @@ function Draw() {
 				}
 			} 
 			else if(board[i][j]==7){ //pizza
-				let pos = UpdatePostionpizza(i,j);
-				// alert(pos[0]);
-				// alert(pos[1]);
-				let xPos = pos[0] * 60 + 30;
-				let yPos = pos[1] * 60 + 30;
+				let x1 = pizza[0] * 60 + 30;
+				let y1 = pizza[1] * 60 + 30;
 				context.beginPath();
-				context.arc(xPos, yPos, 15, 0, 1.5 * Math.PI); // circle
+				context.arc(x1, y1 , 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
@@ -384,7 +386,7 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] ==5) {
 		score= score+25;
 	}
-	UpdatePositionMonsters()
+	// UpdatePositionMonsters()
 	//pac on monster
 	if (board[shape.i][shape.j] == 6) 
 	{
@@ -570,51 +572,67 @@ function rejection(){
 			window.clearInterval(intervalMonster);
 			window.clearInterval(interval);
 		}
-	
+}
 
 function checkAllDir(i,j){
-	if(board[i+1][j]!=0 && board[i-1][j]!=0 && board[i][j-1] !=0 && board[i][j+1]!=0){
+	let listWithoutFood= [2,4,6];
+	if(i == 0){
+
+	}
+	if(listWithoutFood.includes(board[i+1][j])
+	 && listWithoutFood.includes(board[i-1][j]) && 
+	 listWithoutFood.includes(board[i][j-1]) &&
+	 listWithoutFood.includes(board[i][j+1])){
+		alert("cant move");
 		return false;
 	}
 	return true;
 }
-function UpdatePostionpizza(i, j){
+
+function UpdatePostionpizza(){
+	i=pizza[0];
+	j=pizza[1];
 	let flag=true;
-	flag = checkAllDir(i,j);
+	let listWithoutFood= [1,3,5,0];
 	let NewPos;
-	var listReturn=[i,j];
 	while(flag==true){
-		NewPos=Math.floor(Math.random()*(5-1))+1;
-		if(NewPos==1){//up
-			if(board[i+1][j]==0){
-				board[i+1][j]==7;
-				listReturn=[i+1,j];
+		NewPos = Math.floor(Math.random()*(5-1))+1;
+
+		if(NewPos == 1){//down
+			if(i<9 && listWithoutFood.includes(board[i+1][j])){
+				pizza[2] = board[i+1][j];
+				board[i+1][j] = 7;
+				pizza[0]= i+1;
 				flag= false;
 			}
 		}
-		else if(NewPos==2){ //down
-			if(board[i-1][j]==0){
-				board[i-1][j]==7;
-				listReturn=[i-1,j];
+		else if(NewPos==2){ //up
+			if(i>0 && listWithoutFood.includes(board[i-1][j])){
+				pizza[2] = board[i-1][j];
+				board[i-1][j]=7;
+				pizza[0]= i-1;
 				flag= false;
 			} 
 		}
 		else if(NewPos==3){//left
-			if(board[i][j-1]==0){
-				board[i][j-1]==7;
-				listReturn=[i,j-1];
+			if(j>0 && listWithoutFood.includes(board[i][j-1])){
+				pizza[2] = board[i][j-1];
+				board[i][j-1]=7;
+				pizza[1]= j-1;
 				flag= false;
 			}
 		}
 		else if(NewPos==4){//right
-			if(board[i][j+1]==0){
-				board[i][j+1]==7;
-				listReturn=[i,j+1];
-				flag=false;
+			if(j<9 && listWithoutFood.includes(board[i][j+1])){
+				pizza[2] = board[i][j+1];
+				board[i][j+1]=7;
+				pizza[1] = j+1;
+				flag = false;
 			}
 		}
 	}
-	return listReturn;
+	board[i][j]=pizza[2];
+	// return listReturn;
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
