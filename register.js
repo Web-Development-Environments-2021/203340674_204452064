@@ -1,4 +1,4 @@
-var users =[{
+const users =[{
     username:"k",
     password:"k",
     fullname:"k k",
@@ -13,82 +13,99 @@ $(document).ready(function() {
 	
 });
 
-// function registerButton(){
-//     document.getElementById("first_window").style.display = "none";
-//     document.getElementById("register_window").style.display="block";}
+$(function() {
+    $.validator.addMethod('userExist',function(value, element){
+        return userNotExist(value);
+    },'User name is already exist, please choose another name or login.')
 
 
+    $.validator.addMethod('strongPassword' , function(value,element){
+        return this.optional(element) || value.length>=6 && /\d/.test(value) && /[a-z]/i.test(value);
+    
+    }, 'Your password must be at least 6 characters long and contain one number and one char\'.')
+
+    $.validator.addMethod( "lettersonly", function( value, element ) {
+        return this.optional( element ) || /^[a-z\s]+$/i.test( value );
+    }, "Letters only" )
+
+    $("#register-form").validate({
+        rules: {
+            username:{
+                required:true,
+                userExist:true
+            },
+            email:{
+                required: true,
+                email:true
+            },
+            password:
+            {
+                required:true,
+                strongPassword:true
+            },
+            fullname:{
+                
+                lettersonly:true
+            },
+            birthday:{
+                required:true
+            }
+
+
+        },
+        messages: {
+            name:{
+                required: "Please enter a user name",
+               
+            },
+            email:
+            {
+                required: 'Please enter an email address.',
+                email: 'Please enter a <em>valid</em> email address.'
+
+            }
+        }
+
+    });
+})
+$(function() {
+    $('#submit-button').prop('disabled',true);
+    $('#password').keyup(function(){
+        if ($(this).val() != ''){
+            $('#submit-button').prop('disabled',false);
+        }
+    });
+})
 
 function addUser()
 {
-    //console.print("")
-    let nameValid = false, pswValid = false, fullnameValid = false, emailValid = false;
-
-    let nameF = document.getElementById("name").value;
-    //check if name exist
-    const found = users.some(e1=>e1.username === nameF);
-    if (found){
-        alert("name already exist, try to login, or try another name")
-        if(confirm('Login')){
-            switchToLogin();
-        }
-        else if(confirm('try another name'))
-            switchToRegister();
-    }
-    else{
-        nameValid = true;
-
-    }
-    
-    let passwordF = document.getElementById("psw").value;
-    //check pass include numbers&letters + min length 6
-    var minLength = 6, upper = /[A-Z]/, lower = /[a-z]/, digit = /[0-9]/;
-        //var include = /^(?=.*[0-9])(?=.*[A-Za-z].{6,}$/;
-    const validPsw = (passwordF.length>=minLength && (lower.test(passwordF) || upper.test(passwordF)) && digit.test(passwordF));
-    if(!validPsw){
-        alert("password must include letter and number and at least 6 characters")
-    }
-    else{
-        pswValid = true;
-
-    }
-    
-    let fullnameF = document.getElementById("fullname").value;
-    if(digit.test(fullnameF)){
-        alert("full name include only letters")}
-    else{
-        fullnameValid = true;
-    }
-    
-    let emailF = document.getElementById("email").value;
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(! re.test(String(emailF).toLowerCase())){
-        alert("email address is invalid")
-    }
-    else{
-        emailValid = true;
-    }
-    let bdF = document.getElementById("birthday").value;
-    //add new user
-    if(nameValid == true && pswValid == true && fullnameValid == true && emailValid == true)
-    {
+    if($('#register-form').valid()){
+        users.push({
+            username:$('#username').val(),
+            password:$('#password').val(),
+            fullname:$('#fullname').val(),
+            email:$('#email').val(),
+            birthday:new Date($('#birthday').val())
+        });
+        //remove the input fields
+        $("#username").val("");
+        $('#password').val("");
+        $('#fullname').val("");
+        $('#email').val("");
+        $('#birthday').val("")
         
-        users.push({username: nameF, password: passwordF,
-                    fullname: fullnameF,email: emailF,birthday: bdF});
-                    switchToLogin();                 
-
     }
-    else{ // back to first window
-        // document.getElementById("first_window").style.display = "block";
-        // document.getElementById("register_window").style.display="none";
-        switchToRegister();
-    }
-
-    
-
-
 } 
-
+//func return false if exist name
+//if name is valid (there is no user with same name) return true
+function userNotExist(newUser){
+    for(var i=0; i < users.length; i++ ){
+        if(users[i].username == newUser){
+            return false;
+        }
+    }
+    return true;
+};
 
 
 
