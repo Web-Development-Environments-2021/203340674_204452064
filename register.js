@@ -93,7 +93,7 @@ function addUser()
         $('#fullname').val("");
         $('#email').val("");
         $('#birthday').val("")
-        
+        switchTosettings();
     }
 } 
 //func return false if exist name
