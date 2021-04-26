@@ -1,14 +1,17 @@
 var context;
-var shape = new Object();
-var monsterList =[];
+//game
 var board;
+var width = 15;
+var height = 10;
 var score;
 var lifeGame;
 var pac_color;
 var start_time;
 var timeGame;
 var time_elapsed;
-var time_remain = timeGame;
+var time_remain = timeGame; 
+
+//intrvals
 var interval;
 var interval2;
 var intervalMonster;
@@ -16,6 +19,8 @@ var upKey=38;
 var downKey=40;
 var rightKey=39;
 var leftkey=37;
+//food
+
 var food_remain;
 var food5;
 var food15;
@@ -25,17 +30,19 @@ var color15Point;
 var color25Point;
 var numOfManster;
 var pizza;
+
+//manster + pac
+var shape = new Object();
+var monsterList =[];
 var direction;
 var start = 0.15;
 var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
+
 var soundGame;
-var width = 15;
-var height = 10;
-// var xPos;
-// var yPos;
+
 
 
 
@@ -52,9 +59,8 @@ function initial() {
 
 function newGame(){
 	updateForNewGame();
+	clearAllInterval();
 	// soundGame.stop();
-	// clearInterval(interval);
-	// clearInterval(intervalMonster);
 	switchTosettings();	
 }
 
@@ -196,7 +202,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-	intervalMonster =setInterval(UpdatePositionMonsters,350);
+	intervalMonster =setInterval(UpdatePositionMonsters,400);
 	interval2= setInterval(UpdatePostionpizza,300);
 }
 
@@ -421,17 +427,14 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = (timeGame - time_elapsed).toFixed(0);
 	if( time_remain <= 0){
-		window.clearInterval(intervalMonster)
-		window.clearInterval(interval);
+		clearAllInterval();
 		window.alert("TTTTTime");
 	}
 	if (score >= 30 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 	if (score == 1000) {
-		window.clearInterval(intervalMonster)
-		window.clearInterval(interval);
-		window.clearInterval(interval2);
+		clearAllInterval();
 		window.alert("Game completed");
 	} 
   else 
@@ -439,6 +442,12 @@ function UpdatePosition() {
 		Draw();	
 	}
 
+}
+
+function clearAllInterval(){
+	window.clearInterval(intervalMonster);
+	window.clearInterval(interval);
+	window.clearInterval(interval2);
 }
 
 function pacCloseToMonster(){
@@ -607,6 +616,7 @@ function rejection(){
 		{
 			window.clearInterval(intervalMonster);
 			window.clearInterval(interval);
+			window.clearInterval(interval2);
 			alert("game over");
 		}
 
