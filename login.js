@@ -30,6 +30,8 @@ function checkUserExist(){
     else{
         alert("Invalid user or password. please try again");
     }
+    $("#usernamelogin").val("");
+        $('#psw_login').val("");
 }
 
 

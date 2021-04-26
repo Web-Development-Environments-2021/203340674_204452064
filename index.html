@@ -11,9 +11,15 @@
 	<script type="text/javascript" src="./Settings.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
+<title>"GameSHpackMan"</title>
 
 <body>
-	<h1>PacMan</h1>
+	<div class="header">
+		<div id="mainLogo"></div>
+			<img src="logo.png" alt="logo" width="143" height="100">
+			<p>GameSHpackman</p>
+		</div>	
+	</div>
 	<div class="menu">
 		<a  onclick="switchToWelcome()">Welcome</a>
 		<a  onclick="switchToRegister()">Register</a>
@@ -22,42 +28,81 @@
 	</div>
 	<div id = "windows" class="windows">
 	
-	<div id="first_window">
-		<div id="logo">
-			<img src="">
+		<div id="first_window" class="first_window">
+			<div id="logo">
+				<img src="logo.png" alt="logo" width="480" height="440">
+			</div>
+
+			<div id="login" >
+				<button class="button"  onclick="switchToLogin()">Login</button>
+
+			</div>
+
+			<div id="register" >
+				<button class="button" onclick="switchToRegister()">Register</button>
+			</div>
 		</div>
 
-		<div id="login">
-			<button type="button" onclick="switchToLogin()">Login</button>
 
-		</div>
-
-		<div id="register">
-			<button type="button" onclick="switchToRegister()">Register</button>
-
-		</div>
-	</div>
-
-
-	<div id="register_window">
-		<form id="register-form">
-			<div>
-				<input name="username" id = "username" placeholder="Name" type="text">
+		<div id="register_window">
+			<form id="register-form">
+				<div class="label-form">
+					<label for="Uname">user Name</label>
+				</div>
+				<div>
+					<input name="username" id = "username" placeholder="Name" type="text">
+				</div>
+				<br>
+				<br>
+			<div class="label-form">
+				<label for="Emailn">Email</label>
 			</div>
 			<div>
 				<input name="email" id = "email" placeholder="Email Address" type="text">
 			</div>
+			<br>
+			<br>
+			<div class="label-form">
+				<label for="psw">Password</label>
+			</div>
 			<div>
 				<input name="password" id="password" placeholder="Password" type="password">
+			</div>
+			<br>
+			<br>
+			<div class="label-form">
+				<label for="fullname">Fullname</label>
 			</div>
 			<div>
 				<input name="fullname" id = "fullname" placeholder="Full name" type="text">
 			</div>
 			<br>
-			<label for="birthday">Birthday:</label> 
+			<div class="label-form">
+				<label for="brth">Birthday</label>
+			</div>
 			<input type="date" id="birthday" name="birthday">
 			<br>
-			<input class="btn btn-primary" id="submit-button" type="submit" value="Register" onclick="addUser()">		
+			<br>
+			<input type="button" class="button" id="submit-button" type="submit" value="Register" onclick="addUser()">		
+			</form>
+	</div>
+
+	<div id ="login_window">
+		<form>
+			<div class="label-form">
+				<label for="Uname">user Name</label>
+			</div>
+			<input type="text" name = "name" id ="usernamelogin" required>
+			<br>
+			<br>
+			<div class="label-form">
+				<label for="psw">Password</label>
+			</div>
+			<input type="password" name = "psw" id ="psw_login" required>
+			<br>
+			<br>
+			<button type="button" class="button" onclick="checkUserExist()" >login</button>
+			<br>
 		</form>
 	</div>
 
@@ -88,6 +133,9 @@
 		<div style="display:none;">
 		<img id = "monImg" src="monster.png">
 		</div>
+		<div style="display:none;">
+			<img id = "background" src="background.jpg">
+			</div>
 	     <!-- </div> -->
 		<!-- <audio id="songGame" > 
 		</audio> -->
@@ -107,20 +155,7 @@
 	</div>
 	
 	
-	<div id ="login_window">
-		<form>
-			<label for="name">Name</label>
-			<input type="text" name = "name" id ="usernamelogin" required>
-			<br>
-			<label for="password">Password</label>
-			<input type="password" name = "psw" id ="psw_login" required>
-			<br>
-			<button type="button" onclick="checkUserExist()" style="font-size: x-large; font-family: 'papyrus', fantasy;">login</button>
-			<br>
-		</form>
-	</div>
-
-
+	
 	<div id= "settings_window" class="settings_window">
 		<p id="pForchooseKey"><b>Settings page <br> please choose keys for the game:</b></p>
 		<button id="buttonUp" onclick="ChoosekeyUp()" >key</button>
@@ -175,8 +210,14 @@
 </div>
 <dialog id="modal-dialog">
 	<button id="close" class="close" type="button">&times;</button>
+	<br>
+	<br>
 	<p>Shay Erlich & Hallel Helfand</p>
-	<p>uses in jquery.....</p>
+	<p>we use jQuery to validate the user details:</p>
+	<p>we check </p>
+	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
+	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
+	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjghdfghfdkjghdfgkjhdfj</p>
 	<p>template uses.....</p>
 	<p>dificult...........</p>
 </dialog>

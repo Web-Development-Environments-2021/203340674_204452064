@@ -47,7 +47,8 @@ var soundGame;
 
 
 $(document).ready(function() {
-	context = canvas.getContext("2d");
+	context = canvas.getContext("2d");   
+	
 	//logo window
 	initial();
 	//game window
@@ -309,7 +310,7 @@ function Draw() {
 				context.arc(x1, y1 , 15, 0, 2 * Math.PI); // circle
 				context.strokeStyle = '#0099b0';
 				context.stroke();
-				
+				context.fill();
 				// context.fillStyle = "black"; //color
 				// context.fill();
 			}
@@ -326,9 +327,6 @@ function Draw() {
 				context.beginPath();
 				monImg = document.getElementById('monImg');
 				context.drawImage(monImg,center.x-20, center.y-20,40,40);
-				// context.beginPath();
-				// context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
-				// context.fillStyle = "red"; //color
 				 context.fill();
 			}
 			
@@ -366,7 +364,7 @@ function DrawEye(locX,locY,center_x,center_y){
 	eyeX = locX;
 	eyeY = locY
 	context.beginPath();
-	context.arc(center_x + locX, center_y + locY,3,0, 2 * Math.PI); // circle - eye
+	context.arc(center_x + locX, center_y + locY,3,1, 2 * Math.PI); // circle - eye
 	context.fillStyle = "black"; //color
 	context.fill();
 
@@ -603,8 +601,13 @@ function rejection(){
 			locateMonster(monstersLoc);
 			board[shape.i][shape.j] = 0;
 			let temp = findRandomEmptyCell(board);
+			while(temp[0]<2 || temp[0]>8){
+				temp = findRandomEmptyCell(board);
+			}
+			
 			shape.i = temp[0];
 			shape.j = temp[1];
+
 			var cuurTime = new Date().getTime();
 			while(cuurTime + 2000 >= new Date().getTime()){				
 				//document.getElementById('myElem').style.visibility='visible';				

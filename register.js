@@ -14,6 +14,7 @@ $(document).ready(function() {
 });
 
 $(function() {
+
     $.validator.addMethod('userExist',function(value, element){
         return userNotExist(value);
     },'User name is already exist, please choose another name or login.')
@@ -86,15 +87,21 @@ function addUser()
             fullname:$('#fullname').val(),
             email:$('#email').val(),
             birthday:new Date($('#birthday').val())
+            
+
         });
+        
         //remove the input fields
         $("#username").val("");
         $('#password').val("");
         $('#fullname').val("");
         $('#email').val("");
-        $('#birthday').val("")
+        $('#birthday').val("");
         switchTosettings();
+        
+        
     }
+
 } 
 //func return false if exist name
 //if name is valid (there is no user with same name) return true
