@@ -45,6 +45,7 @@ function switchDialogAboout(){
     {
         $('#modal-dialog').hide()
     })
+    
     $(document).on('mousedown',function(e)
     {
             $('#modal-dialog').hide();
@@ -54,9 +55,6 @@ function switchDialogAboout(){
 
 
 }
-
-
-
 function switchTosettings(){
     $('#windows').children().hide();
     $('#settings_window').show();
