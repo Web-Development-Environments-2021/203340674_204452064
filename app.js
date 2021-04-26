@@ -32,6 +32,11 @@ var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
 var soundGame;
+var width = 15;
+var height = 10;
+// var xPos;
+// var yPos;
+
 
 
 $(document).ready(function() {
@@ -55,7 +60,7 @@ function newGame(){
 
 function EmptyCellForMonster(){
 	var cellsOfMonsters = [] //location of monster
-	var corners=[[0,0],[0,9],[9,0],[9,9]]; // all corners
+	var corners=[[0,0],[0,width],[height,0],[height,width]]; // all corners
 	var monstersRemain = numOfManster;
 	var ind=0;
 	while(monstersRemain!=0){
@@ -111,14 +116,14 @@ function Start() {
 	lifeGame=5;
 	score = 0;
 	pac_color = "yellow";
-	var cnt = 100;//num of cells
+	var cnt = width*height;//num of cells
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
 	monstersLoc = EmptyCellForMonster()
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < width; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) { //obstacles
+		for (var j = 0; j < height; j++) { //obstacles
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
@@ -215,11 +220,11 @@ function setFoodRemaine(){
 
 // get empty cell
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * width);
+	var j = Math.floor(Math.random() * height);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * width);
+		j = Math.floor(Math.random() * height);
 	}
 	return [i, j];
 }
@@ -251,11 +256,11 @@ function Draw() {
 	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < width; i++) {
+		for (var j = 0; j < height; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 50 + 30;
+			center.y = j * 50 + 30;
 			
 			if (board[i][j] == 2) { // packman	
 				var center_x = center.x;
@@ -289,8 +294,8 @@ function Draw() {
 				}
 			} 
 			else if(board[i][j]==7){ //pizza
-				let x1 = pizza[0] * 60 + 30;
-				let y1 = pizza[1] * 60 + 30;
+				let x1 = pizza[0] * 50 + 30;
+				let y1 = pizza[1] * 50 + 30;
 				context.beginPath();
 				context.arc(x1, y1 , 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
@@ -368,13 +373,13 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) { ////right
+		if (shape.j < (height-1) && board[shape.i][shape.j + 1] != 4) { ////right
 			shape.j++;
 		}
 	}
 	
 	if (x == 3) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {//down
+		if (shape.i < (width-1) && board[shape.i + 1][shape.j] != 4) {//down
 			shape.i++;
 		}
 	}
@@ -418,11 +423,14 @@ function UpdatePosition() {
 		window.clearInterval(intervalMonster)
 		window.clearInterval(interval);
 		window.alert("Game completed");
-	} else {
+	} 
+  else 
+  {
 		Draw();	
 	}
- 
+
 }
+
 function pacCloseToMonster(){
 	for (var ind=0; ind<monsterList.length; ind++){
 		if(Math.abs(shape.i - monsterList[ind].i) < 1 && Math.abs(shape.j - monsterList[ind].j) < 1){
@@ -450,7 +458,7 @@ function UpdatePositionMonsters()
 	var pacY = shape.j;
 	var monX;
 	var monY;
-	var minDis = Math.sqrt(9*9 + 9*9);
+	var minDis = Math.sqrt(width*width + height*height);
 	var minDir;
 	var currDis;
 	
@@ -458,7 +466,7 @@ function UpdatePositionMonsters()
 	{
 		var row = monsterList[ind].i;
 		var col = monsterList[ind].j;
-		minDis = Math.sqrt(9*9 + 9*9);
+		minDis = Math.sqrt(width*width + height*height);
 		minDir = 5;
 		
 		if(col > 0 && board[row][col - 1] != 4) //no wall in left
@@ -489,7 +497,7 @@ function UpdatePositionMonsters()
 				}			
 			}
 		}
-		if(col < 9 && board[row][col + 1] != 4)//no walls right 
+		if(col < height-1 && board[row][col + 1] != 4)//no walls right 
 		{
 			if(board[row][col+1] != 6) // no monster right
 			{
@@ -504,7 +512,7 @@ function UpdatePositionMonsters()
 			}
 		}		
 		
-		if (row < 9 && board[row + 1][col] != 4) //no walls down
+		if (row < width-1 && board[row + 1][col] != 4) //no walls down
 		{	
 			if(board[row+1][col] != 6) // no monster down
 			{

@@ -1,13 +1,14 @@
 
-function settings(){
-    chooseKeys();
-    chooseBalls();
-    chooseColorBall();
-    chooseTimePlay();
-    chooseNumOfmanster();
-    switchToGame();
+function settings()
+{
+    
+        chooseKeys();
+        chooseBalls();
+        chooseColorBall();
+        chooseTimePlay();
+        chooseNumOfmanster();
+        switchToGame();
 }
-
 function chooseKeys(){
     downKey = asciiNum(document.getElementById("down").value);
     upKey= asciiNum(document.getElementById("up").value);
