@@ -198,6 +198,7 @@ function updateForNewGame(){
     $('#pForchoosecolor').show();
     $('#pForchoosetime').show();
     $('#pForchoosemanster').show();
+    $('#resetButton').show();
     document.getElementById("up").readOnly= false;
     document.getElementById("down").readOnly= false;
     document.getElementById("left").readOnly= false;
@@ -258,6 +259,18 @@ function checkForManster(){
     } 
 }
 
+function clearText(){
+    document.getElementById("up").value = "";
+    document.getElementById("down").value = "";
+    document.getElementById("left").value = "";
+    document.getElementById("right").value = "";
+    document.getElementById("ballsToEat").value = "";
+    document.getElementById("color5").value = "";
+    document.getElementById("color15").value = "";
+    document.getElementById("color25").value = "";
+    document.getElementById("timeForGame").value = "";
+    document.getElementById("numOfMansterIn").value = "";
+}
 
 // function chooseKeys(){
 //     downKey = asciiNum(document.getElementById("down").value);
