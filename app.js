@@ -60,7 +60,7 @@ function newGame(){
 
 function EmptyCellForMonster(){
 	var cellsOfMonsters = [] //location of monster
-	var corners=[[0,0],[0,width],[height,0],[height,width]]; // all corners
+	var corners=[[0,0],[width-1,0],[0,height-1],[height-1,width-1]]; // all corners
 	var monstersRemain = numOfManster;
 	var ind=0;
 	while(monstersRemain!=0){
@@ -169,6 +169,7 @@ function Start() {
 				cnt--;
 			}
 		}
+		
 	}
 	setFoodRemaine();
 	//click
@@ -454,6 +455,9 @@ function locateMonster(monsterLoc)
 // cant move when exist wall or if exist other monster
 function UpdatePositionMonsters()
 {
+	if(board[0].length>10){
+		var bb =8;
+	}
 	var pacX = shape.i;
 	var pacY = shape.j;
 	var monX;
@@ -584,11 +588,12 @@ function rejection(){
 			locateMonster(monstersLoc);
 			board[shape.i][shape.j] = 0;
 			shape.i = findRandomEmptyCell(board)[0];
-			if(board[shape.i][shape.j]==4){
-				alert(board[shape.i][shape.j]);
-			}			
+			
 			shape.j = findRandomEmptyCell(board)[1];
-
+			if(board[shape.i][shape.j]==4)
+			{
+				alert(board[shape.i][shape.j]);
+			}
 			var cuurTime = new Date().getTime();
 			while(cuurTime + 2000 >= new Date().getTime()){				
 				//document.getElementById('myElem').style.visibility='visible';				
