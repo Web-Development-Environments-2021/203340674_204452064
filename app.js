@@ -251,7 +251,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblPlayerName.value = document.getElementById("username").value;;
+	lblPlayerName.value = document.getElementById("usernamelogin").value;;
 	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
@@ -297,8 +297,11 @@ function Draw() {
 				let y1 = pizza[1] * 50 + 30;
 				context.beginPath();
 				context.arc(x1, y1 , 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				context.strokeStyle = '#0099b0';
+				context.stroke();
+				
+				// context.fillStyle = "black"; //color
+				// context.fill();
 			}
 			else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
 				DrawDiffFood(board[i][j],center.x,center.y);
@@ -311,9 +314,12 @@ function Draw() {
 			}
 			else if(board[i][j] == 6 ){ //monster
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
-				context.fillStyle = "red"; //color
-				context.fill();
+				monImg = document.getElementById('monImg');
+				context.drawImage(monImg,center.x-20, center.y-20,40,40);
+				// context.beginPath();
+				// context.arc(center.x, center.y, 15, 0, 1.5 * Math.PI); // circle
+				// context.fillStyle = "red"; //color
+				 context.fill();
 			}
 			
 		}
@@ -339,7 +345,7 @@ function DrawBody(startAngle,endAngle,center_x,center_y){
 	start = startAngle;
 	end = endAngle;
 	context.beginPath();
-	context.arc(center_x, center_y, 30, startAngle * Math.PI, endAngle * Math.PI); // half circle
+	context.arc(center_x, center_y, 20, startAngle * Math.PI, endAngle * Math.PI); // half circle
 	context.lineTo(center_x, center_y);
 	context.fillStyle = pac_color; //color
 	context.fill();
@@ -350,7 +356,7 @@ function DrawEye(locX,locY,center_x,center_y){
 	eyeX = locX;
 	eyeY = locY
 	context.beginPath();
-	context.arc(center_x + locX, center_y + locY,5,0, 2 * Math.PI); // circle - eye
+	context.arc(center_x + locX, center_y + locY,3,0, 2 * Math.PI); // circle - eye
 	context.fillStyle = "black"; //color
 	context.fill();
 
@@ -409,7 +415,7 @@ function UpdatePosition() {
 	
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	time_remain = timeGame - time_elapsed;
+	time_remain = (timeGame - time_elapsed).toFixed(0);
 	if( time_remain <= 0){
 		window.clearInterval(intervalMonster)
 		window.clearInterval(interval);
@@ -453,9 +459,6 @@ function locateMonster(monsterLoc)
 // cant move when exist wall or if exist other monster
 function UpdatePositionMonsters()
 {
-	if(board[0].length>10){
-		var bb =8;
-	}
 	var pacX = shape.i;
 	var pacY = shape.j;
 	var monX;
