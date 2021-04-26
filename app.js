@@ -32,8 +32,6 @@ var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
 var soundGame;
-// var xPos;
-// var yPos;
 
 
 $(document).ready(function() {
@@ -50,6 +48,8 @@ function initial() {
 function newGame(){
 	updateForNewGame();
 	// soundGame.stop();
+	// clearInterval(interval);
+	// clearInterval(intervalMonster);
 	switchTosettings();	
 }
 
@@ -119,7 +119,6 @@ function Start() {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) { //obstacles
-
 			if(checkIfMonsterCell(monstersLoc,i,j)){
 				board[i][j] = 6;
 			}
@@ -133,11 +132,11 @@ function Start() {
 			) {
 				board[i][j] = 4;
 			 }
-			else if(i==4 && j==4){
+			else if(i==4 && j==7){
 				board[i][j] = 7
 			} 
 			else {
-				
+		
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food5) / cnt) { // put sweets
 					board[i][j] = 1;
@@ -188,7 +187,7 @@ function Start() {
 
 	intervalMonster =setInterval(UpdatePositionMonsters,350);
 
-	interval2= setInterval(UpdatePostionpizza,500);
+	interval2= setInterval(UpdatePostionpizza,300);
 	
 
 }
@@ -380,24 +379,29 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
-		score= score+5;
+		score = score+5;
 	}
 	if (board[shape.i][shape.j] == 3) {
-		score= score+15;
+		score = score+15;
 	}
 	if (board[shape.i][shape.j] ==5) {
-		score= score+25;
+		score = score+25;
 	}
+	if(board[shape.i][shape.j] ==7){
+		score = score+50;
+		clearInterval(interval2);
+	}
+	
 	// UpdatePositionMonsters()
 
 
 	//monster one step from pac
-	if (pacCloseToMonster()){
-		rejection()
-		
-	}
-	else{
-		board[shape.i][shape.j] = 2;
+	// if (pacCloseToMonster()){
+	// if(board[shape.i][shape.j]==6){
+	// 	rejection()
+	// }
+	// else{
+	board[shape.i][shape.j] = 2;
 	
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
@@ -417,6 +421,7 @@ function UpdatePosition() {
 	} else {
 		Draw();	
 	}
+ 
 }
 function pacCloseToMonster(){
 	for (var ind=0; ind<monsterList.length; ind++){
@@ -496,7 +501,6 @@ function UpdatePositionMonsters()
 					minDis = currDis;
 					minDir = 3
 				}			
-
 			}
 		}		
 		
@@ -537,15 +541,21 @@ function UpdatePositionMonsters()
 		if (minDir == 4)
 		{
 			monsterOnsweets[ind] = board[row+1][col];
-			monsterList[ind].i++;
-			
+			monsterList[ind].i++;			
 		}
 		
 		row = monsterList[ind].i;
 		col = monsterList[ind].j;
-		board[row][col] = 6;
+		if(board[row][col]==2){
+			rejection()
+		}
+		else{
+			board[row][col] = 6;
+		}
+		
 		
 	}
+	Draw();
 }
 
 function rejection(){
@@ -565,8 +575,11 @@ function rejection(){
 			monstersLoc = EmptyCellForMonster();
 			locateMonster(monstersLoc);
 			board[shape.i][shape.j] = 0;
-			shape.i = findRandomEmptyCell(board)[0] ;
-			shape.j = findRandomEmptyCell(board)[1] ;
+			shape.i = findRandomEmptyCell(board)[0];
+			if(board[shape.i][shape.j]==4){
+				alert(board[shape.i][shape.j]);
+			}			
+			shape.j = findRandomEmptyCell(board)[1];
 
 			var cuurTime = new Date().getTime();
 			while(cuurTime + 2000 >= new Date().getTime()){				
@@ -607,7 +620,6 @@ function UpdatePostionpizza(){
 	let NewPos;
 	while(flag==true){
 		NewPos = Math.floor(Math.random()*(5-1))+1;
-
 		if(NewPos == 1){//down
 			if(i<9 && listWithoutFood.includes(board[i+1][j])){
 				pizza[2] = board[i+1][j];
@@ -642,7 +654,7 @@ function UpdatePostionpizza(){
 		}
 	}
 	board[i][j]=pizza[2];
-	// return listReturn;
+	Draw();
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
