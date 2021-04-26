@@ -55,11 +55,12 @@ function switchDialogAboout(){
 
 }
 
-
-
 function switchTosettings(){
     $('#windows').children().hide();
     $('#settings_window').show();
 }
 
+// function openGemeOverWindow(){
+//     $('#myForm').show();
+// }
 
