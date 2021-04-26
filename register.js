@@ -99,7 +99,7 @@ function addUser()
         $('#birthday').val("");
         switchTosettings();
         
-         
+        
     }
 
 } 

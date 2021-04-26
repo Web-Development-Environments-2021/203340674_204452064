@@ -158,23 +158,28 @@
 	
 	<div id= "settings_window" class="settings_window">
 		<p id="pForchooseKey"><b>Settings page <br> please choose keys for the game:</b></p>
+		<button id="buttonUp" onclick="ChoosekeyUp()" >key</button>
 		<label for="up">up Key</label>
-		<input type="text" name = "up" id ="up" required>
+		<input type="text" name = "up" id ="up" readonly>
 		<br>
+		<button id="buttonDown" onclick="ChoosekeyDown()" disabled>Down</button>
 		<label for="down">down Key</label>
-		<input type="text" name = "down" id ="down" required>
+		<input type="text" name = "down" id ="down" readonly>
 		<br>
+		<button id="buttonLeft" onclick="ChoosekeyLeft()" disabled>Left</button>
 		<label for="left">left Key</label>
-		<input type="text" name = "left" id ="left" required>
+		<input type="text" name = "left" id ="left" readonly>
 		<br>
+		<button id="buttonRight" onclick="ChoosekeyRight()" disabled>Right</button>
 		<label for="right">rightKeys</label>
-		<input type="text" name = "right" id ="right" required>
+		<input type="text" name = "right" id ="right" readonly>
 		<br>
-		<!-- <button type="button" onclick="chooseKeys()">OK</button> -->
+
 		<p id="pForchooseBalls">please choose number of balls:</p>
 		<label for="numofballs">number of balls</label>
-		<input type="text" name ="ballsToEat" id ="ballsToEat" min="50" max="90" required>
+		<input type="text" name ="ballsToEat" id ="ballsToEat" min="50" max="90" oninput="checkForBalls()">
 		<br>
+
 		<!-- <button type="button" onclick="chooseBalls()">OK</button> -->
 		<p id="pForchoosecolor">please choose a color for each kind:</p>
 		<label for="color5ball">color for 5 point</label>		   
@@ -183,19 +188,21 @@
 		<input type="color" name ="color15" id ="color15" required><br>
 		<label for="color5ball">color for 25 point</label>		   
 		<input type="color" name ="color25" id ="color25" required>
+
 		<br>
 		<!-- <button type="button" onclick="chooseColorBall()">OK</button> -->
 		<p id="pForchoosetime">please choose time for the game:</p>
 		<label for="timeForGame">time for the game</label>		   
-		<input type="number" name ="timeForGame" id ="timeForGame" required>
+		<input type="number" name ="timeForGame" id ="timeForGame" oninput="checkFortime()">
 		<!-- <button type="button" onclick="chooseTimePlay()">OK</button> -->
+
 		<p id="pForchoosemanster">please choose number for manster:</p>
 		<br>
 		<label for="manster">number of munster</label>		   
-		<input type="number" name ="numOfMansterIn" id ="numOfMansterIn" required>
+		<input type="number" name ="numOfMansterIn" id ="numOfMansterIn" oninput="checkForManster()">
 		<br>
 		<!-- <button type="button" onclick="chooseNumOfmanster()">OK</button> -->
-		<button type="submit" onclick="settings()" id="settingsbutton">GoToGame</button>
+		<button type="submit" onclick="settings()" id="settingsbutton" disabled>GoToGame</button>
 		<button type="submit" onclick="randomSettings()" id="randombutton" >RandomSettings</button>
 
 	
