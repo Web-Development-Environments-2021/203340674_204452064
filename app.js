@@ -78,12 +78,12 @@ function EmptyCellForMonster(){
 	
 	return cellsOfMonsters;
 }
+
 function checkIfMonsterCell(monsterLoc,i,j){
 	for (var ind = 0; ind <monsterLoc.length;ind++){
 		if (monsterLoc[ind][0] == i && monsterLoc[ind][1] == j){
 			return true;
 		}
-
 	}
 	return false;
 }
@@ -102,8 +102,6 @@ function removeMonsterFromLastRound(){
 		{
 			board[row][col]=0;
 		}
-
-
 	}
 		}
 
