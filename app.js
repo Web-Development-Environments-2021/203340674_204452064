@@ -59,8 +59,8 @@ function initial() {
 }
 
 function newGame(){
-	updateForNewGame();
 	clearAllInterval();
+	updateForNewGame();	
 	// soundGame.stop();
 	switchTosettings();	
 }
@@ -177,7 +177,8 @@ function Start() {
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2;
-				} else {
+				}
+				 else {
 					board[i][j] = 0;
 				}
 				cnt--;
@@ -426,7 +427,13 @@ function UpdatePosition() {
 	time_remain = (timeGame - time_elapsed).toFixed(0);
 	if( time_remain <= 0){
 		clearAllInterval();
-		window.alert("TTTTTime");
+		if(score<100){
+			window.alert("You are better than"+ score + "points");
+		}
+		else{
+			alert("WINNER!!")
+		}
+		
 	}
 	if (score >= 30 && time_elapsed <= 10) {
 		pac_color = "green";
@@ -620,7 +627,7 @@ function rejection(){
 			window.clearInterval(intervalMonster);
 			window.clearInterval(interval);
 			window.clearInterval(interval2);
-			alert("game over");
+			alert("LOSER!!!!");
 		}
 
 	}

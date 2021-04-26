@@ -74,12 +74,14 @@ p{
     display: flex;
 }
 .game_window {
-    flex: 1;  
-}  
+    flex: 1;
+}
+
 .settings_window {
     margin-right: 500px;
     margin-top: 80px;
-    
+    /* position: absolute; */
+    /* left: 40%; */
 }
 #register-form{
     position: absolute;

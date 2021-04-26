@@ -158,7 +158,7 @@
 	
 	<div id= "settings_window" class="settings_window">
 		<p id="pForchooseKey"><b>Settings page <br> please choose keys for the game:</b></p>
-		<button id="buttonUp" onclick="ChoosekeyUp()" >key</button>
+		<button id="buttonUp" onclick="ChoosekeyUp()" >UP</button>
 		<label for="up">up Key</label>
 		<input type="text" name = "up" id ="up" readonly>
 		<br>
@@ -202,14 +202,17 @@
 		<input type="number" name ="numOfMansterIn" id ="numOfMansterIn" oninput="checkForManster()">
 		<br>
 		<!-- <button type="button" onclick="chooseNumOfmanster()">OK</button> -->
-		<button type="submit" onclick="settings()" id="settingsbutton" disabled>GoToGame</button>
-		<button type="submit" onclick="randomSettings()" id="randombutton" >RandomSettings</button>
+		<button type="submit" onclick="settings()" id="settingsbutton" disabled>Start game</button>
+		<button type="submit" onclick="randomSettings()" id="randombutton" >Random settings</button>
+		<button type="submit" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
 
 	
 	</div>
+
 </div>
 <div id="dialog" class="modal">
 	<dialog id="modal-dialog">
+
 	<button id="close" class="close" type="button">&times;</button>
 	<br>
 	<br>
