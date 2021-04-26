@@ -48,7 +48,6 @@ function chooseColorBall(){
     color5Point = document.getElementById("color5").value;
     color15Point = document.getElementById("color15").value;
     color25Point = document.getElementById("color25").value;
-    alert("good color");
 }
 
 function chooseTimePlay(){
