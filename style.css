@@ -1,27 +1,108 @@
 
-/* #gameShow{
-    /* display: inline-block; */
-    /* display: flex; */
-    /* float:right; */
-/* } */ 
+.header{
+    background-color: rgb(143, 134, 134);
+}
+p{
+    font-size: 20px;
+    margin-top: 0;
+    color:white;
+}
 
+.menu {
+    width:750px;
+    margin:0 auto;
+    list-style:none;
+    font-family: italic small-caps bold
+    }
+.menu a {
+    float:left;
+    font: italic small-caps bold
+    }
+.menu a {
+    font-size: 30px;
+    display:block;
+    text-align:center;
+    width:150px; /* fixed width */
+    text-decoration:none; 
+    }
+.menu a:hover {
+    color: rgb(158, 19, 65);
+    font-size: 40 px;
+    font-weight: bold;
+    
+}
+#logo{
+    position: absolute;
+    left: 29%;
+    top: 30%;
+   
+}  
+  .button {
+    padding: 10px 15px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #c9367a;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 8px #999;
+    font-family: italic small-caps bold
+  }
+  
+  .button:hover 
+  {background-color: #0d0346}
+  
+  .button:active {
+    background-color: #172746;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  } 
+.first_window #login{
+    position: absolute;
+    left: 29.5%;
+    top: 80%;
+}
+.first_window #register{
+    position: absolute;
+    left: 52.5%;
+    top: 80%;
+}
 
 .windows{
     display: flex;
 }
-
-/* #window.settings_window {
-    margin-right: 20px; */
-/* } */
-
 .game_window {
-    flex: 1;
-    /* border: 2px solid yellow; */
+    flex: 1;  
 }  
-
 .settings_window {
     margin-right: 500px;
     margin-top: 80px;
-    /* text-align: center; */
+    
 }
+#register-form{
+    position: absolute;
+    left: 40%;
+    top: 30%;
+
+}
+.label-form{
+    font-size: 20px;
+}
+#login_window{
+    position: absolute;
+    left: 40%;
+    top: 30%;
+
+}
+#modal-dialog{
+    position: absolute;
+    top: 30%;
+    background-color: rgb(8, 8, 49);
+    
+
+}
+
+
 
