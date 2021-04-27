@@ -139,6 +139,10 @@ function chooseNumOfmanster(){
 
 //Initializes all settings at random
 function randomSettings(){
+    upKey=38;
+    downKey=40;
+    rightKey=39;
+    leftkey=37;
     food_remain = Math.floor(Math.random()*(90-50))+50;
     kindOfFood();
     timeGame= Math.floor(Math.random()*100)+60;
@@ -193,6 +197,7 @@ function readOnlyStettings(){
 function updateForNewGame(){
     $('#settings_window').css({left:'28%',top:'20%'});
     $('#settingsbutton').show();
+    document.getElementById("settingsbutton").disabled= false;
     $('#randombutton').show();
     $('#pForchooseKey').show();
     $('#pForchooseBalls').show();
@@ -238,6 +243,7 @@ function checkForBalls(){
     }
     if(counterForSetButtoml == 3){
         document.getElementById("settingsbutton").disabled =false;
+
     }
 }
 
@@ -272,7 +278,8 @@ function clearText(){
     document.getElementById("color25").value = "";
     document.getElementById("timeForGame").value = "";
     document.getElementById("numOfMansterIn").value = "";
-    // document.getElementById("settingsbutton").display=true;
+    document.getElementById("settingsbutton").disabled=true;
+    counterForSetButtoml=0;
 
 }
 
