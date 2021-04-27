@@ -176,10 +176,10 @@ function updateTextInRandom(){
 
 // set the text read only
 function readOnlyStettings(){
-    document.getElementById("up").readOnly= true;
-    document.getElementById("down").readOnly= true;
-    document.getElementById("left").readOnly= true;
-    document.getElementById("right").readOnly= true;
+    // document.getElementById("up").readOnly= true;
+    // document.getElementById("down").readOnly= true;
+    // document.getElementById("left").readOnly= true;
+    // document.getElementById("right").readOnly= true;
     document.getElementById("ballsToEat").readOnly= true;
     document.getElementById("color5").readOnly= true;
     document.getElementById("color15").readOnly= true;
