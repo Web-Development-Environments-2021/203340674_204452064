@@ -12,6 +12,7 @@ function switchToRegister(){
 function switchToGame(){
     $('#windows').children().hide();
     $('#game_window').show();
+    $('#settings_window').css({top:'40%' , left:'70%'});
     $("#settings_window").show();
     $('#settingsbutton').hide();
     $('#randombutton').hide();
@@ -31,24 +32,23 @@ function switchToWelcome(){
     $('#first_window').show();
 }
 function switchDialogAboout(){
-    $('#modal-dialog').show()
+    $('#myModal').show()
     //esc press
     $(document).on('keydown',function(e)
     {
         if(e.keyCode == 27)
         {
-            $('#modal-dialog').hide();
+            $('#myModal').hide();
         }
     })
     //X button
     $('#close').click(function()
     {
-        $('#modal-dialog').hide()
+        $('#myModal').hide()
     })
-    
     $(document).on('mousedown',function(e)
     {
-            $('#modal-dialog').hide();
+            $('#myModal').hide();
         
     })
     
