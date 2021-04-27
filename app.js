@@ -349,8 +349,8 @@ function Draw() {
 			
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
-				context.rect(center.x - 20, center.y - 20, 50, 50);
-				context.fillStyle = "grey"; //color
+				let wallImg = document.getElementById('wall');
+				context.drawImage(wallImg,center.x-20, center.y-20,50,50);
 				context.fill();
 			}
 			else if(board[i][j] == 6 ){ //monster
@@ -484,6 +484,9 @@ function UpdatePosition() {
 		if(lifeGame>0){
 		lifeGame--;
 		}
+	}
+	else if(board[shape.i][shape.j]==6){
+		rejection();
 	}
 
 	board[shape.i][shape.j] = 2;
