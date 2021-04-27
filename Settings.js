@@ -191,6 +191,7 @@ function readOnlyStettings(){
 
 //update the fields fot new game
 function updateForNewGame(){
+    $('#settings_window').css({left:'28%',top:'20%'});
     $('#settingsbutton').show();
     $('#randombutton').show();
     $('#pForchooseKey').show();
@@ -209,6 +210,7 @@ function updateForNewGame(){
     document.getElementById("color25").readOnly= false;
     document.getElementById("timeForGame").readOnly= false;
     document.getElementById("numOfMansterIn").readOnly= false;
+    
 }
 
 //music for game

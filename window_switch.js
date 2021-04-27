@@ -21,6 +21,7 @@ function switchToGame(){
     $('#pForchoosecolor').hide();
     $('#pForchoosetime').hide();
     $('#pForchoosemanster').hide();
+    $('#press').hide();
     readOnlyStettings();
     Start();
 }
