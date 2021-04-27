@@ -242,8 +242,8 @@ function checkForBalls(){
         counterForSetButtoml++;
     }
     if(counterForSetButtoml == 3){
-        document.getElementById("settingsbutton").disabled =false;
 
+        buttonAble();
     }
 }
 
@@ -253,7 +253,7 @@ function checkFortime(){
         counterForSetButtoml++;
     }
     if(counterForSetButtoml == 3){
-        document.getElementById("settingsbutton").disabled =false;
+        buttonAble()
     }
 }
 
@@ -263,8 +263,13 @@ function checkForManster(){
         counterForSetButtoml++;
     }
     if(counterForSetButtoml == 3){
-        document.getElementById("settingsbutton").disabled =false;
+        buttonAble()
     } 
+}
+function buttonAble(){
+    $('#settingsbutton').css({background:'#c9367a'});
+    document.getElementById("settingsbutton").disabled =false;
+
 }
 
 function clearText(){
