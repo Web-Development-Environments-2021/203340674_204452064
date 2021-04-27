@@ -53,9 +53,6 @@ function switchDialogAboout(){
             $('#myModal').hide();
         
     })
-    
-
-
 }
 
 function switchTosettings(){
@@ -63,7 +60,4 @@ function switchTosettings(){
     $('#settings_window').show();
 }
 
-// function openGemeOverWindow(){
-//     $('#myForm').show();
-// }
 

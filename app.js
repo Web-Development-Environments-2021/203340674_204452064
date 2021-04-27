@@ -35,13 +35,13 @@ var pizza;
 
 //game player
 var shape = new Object();
-var monsterList =[];
+var monsterList;
 var direction;
 var start = 0.15;
 var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
-var monsterOnsweets=[0,0,0,0];
+var monsterOnsweets;
 var slowMotiom;
 var flagSlowMotion;
 var plusLife1;
@@ -65,12 +65,14 @@ function initial() {
 	switchToWelcome();
 }
 
+//stop the game and switch to settings
 function newGame(){
 	clearAllInterval();
 	updateForNewGame();	
-	// soundGame.stop();
+	soundGame.stop();
 	switchTosettings();	
 }
+
 
 function EmptyCellForMonster(){
 	var cellsOfMonsters = [] //location of monster
@@ -89,7 +91,6 @@ function EmptyCellForMonster(){
 		monsterList[ind] = newMonster;
 		ind++;
 	}
-	
 	return cellsOfMonsters;
 }
 
@@ -117,14 +118,14 @@ function removeMonsterFromLastRound(){
 			board[row][col]=0;
 		}
 	}
-		}
+}
 
 function Start() {
 	//initial score&time	
 	board = new Array();
 	pizza= [5,8];
-	// soundGame = new sound("test.mp3");
-	// soundGame.play();
+	soundGame = new sound("test.mp3");
+	soundGame.play();
 	lifeGame=5;
 	slowMotiom = 1;
 	flagSlowMotion= true;
@@ -133,11 +134,13 @@ function Start() {
 	plusLife1 = 1;
 	plusLife2 = 1;
 	minusLife1 = 1;
+	monsterOnsweets=[0,0,0,0];
 	pac_color = "yellow";
+	monsterList =[];
 	var cnt = width*height;//num of cells
 	var pacman_remain = 1;//num of pacmans?
 	start_time = new Date();
-	monstersLoc = EmptyCellForMonster()
+	monstersLoc = EmptyCellForMonster();
 	for (var i = 0; i < width; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -383,6 +386,7 @@ function Draw() {
 	}
 }
 
+// draw the food in different color
 function DrawDiffFood(num,x,y){
 	context.beginPath();
 	context.arc(x, y, 15, 0, 2 * Math.PI); // circle
@@ -459,9 +463,7 @@ function UpdatePosition() {
 		leftToEat--;
 	}
 	else if(board[shape.i][shape.j] ==7){  // move food, 50 points
-		window.clearInterval(interval2);
-		score = score+50;
-		leftToEat--;
+		pacmanEatPizza();
 	}
 	else if(board[shape.i][shape.j] == 10){ //slow motion
 		clearInterval(intervalMonster);
@@ -497,7 +499,6 @@ function UpdatePosition() {
 		else{
 			alert("WINNER!!")
 		}
-		
 	}
 	if (score >= 30 && time_remain <= 10) {
 		pac_color = "green";
@@ -716,6 +717,7 @@ function checkAllDir(i,j){
 	return true;
 }
 
+//update the move of the pizza object
 function UpdatePostionpizza(){
 	i=pizza[0];
 	j=pizza[1];
@@ -725,7 +727,7 @@ function UpdatePostionpizza(){
 	while(flag==true){
 		NewPos = Math.floor(Math.random()*(5-1))+1;
 		if(NewPos == 1){//down
-			if(i<9 && listWithoutFood.includes(board[i+1][j])){
+			if(i< width-1 && listWithoutFood.includes(board[i+1][j])){
 				pizza[2] = board[i+1][j];
 				board[i+1][j] = 7;
 				pizza[0]= i+1;
@@ -749,7 +751,7 @@ function UpdatePostionpizza(){
 			}
 		}
 		else if(NewPos==4){//right
-			if(j<9 && listWithoutFood.includes(board[i][j+1])){
+			if(j<height-1 && listWithoutFood.includes(board[i][j+1])){
 				pizza[2] = board[i][j+1];
 				board[i][j+1]=7;
 				pizza[1] = j+1;
@@ -758,6 +760,10 @@ function UpdatePostionpizza(){
 		}
 	}
 	board[i][j]=pizza[2];
+	if(board[pizza[0]][pizza[1]]==2){
+		pacmanEatPizza();
+		board[pizza[0]][pizza[1]]=2;
+	}
 	Draw();
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
@@ -771,3 +777,9 @@ function whichObject(i,j,monInd){
 	}
 }
 
+//when pacman and pizza on same cell
+function pacmanEatPizza(){
+	window.clearInterval(interval2);
+	score = score+50;
+	leftToEat--;
+}
