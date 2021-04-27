@@ -23,6 +23,7 @@ var leftkey=37;
 
 //food
 var food_remain;
+var leftToEat;
 var food5;
 var food15;
 var food25;
@@ -32,7 +33,7 @@ var color25Point;
 var numOfManster;
 var pizza;
 
-//manster + pac
+//game player
 var shape = new Object();
 var monsterList =[];
 var direction;
@@ -41,8 +42,12 @@ var end = 1.85;
 var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
-
 var slowMotiom;
+var flagSlowMotion;
+var plusLife1;
+var plusLife2;
+var minusLife1;
+
 var soundGame;
 
 
@@ -122,7 +127,12 @@ function Start() {
 	// soundGame.play();
 	lifeGame=5;
 	slowMotiom = 1;
+	flagSlowMotion= true;
+	leftToEat= food_remain +1;
 	score = 0;
+	plusLife1 = 1;
+	plusLife2 = 1;
+	minusLife1 = 1;
 	pac_color = "yellow";
 	var cnt = width*height;//num of cells
 	var pacman_remain = 1;//num of pacmans?
@@ -181,10 +191,6 @@ function Start() {
 					pacman_remain--;
 					board[i][j] = 2;
 				}
-				else if((randomNum < (1.0 * (slowMotiom + food_remain)) / cnt) && slowMotiom>0){
-					slowMotiom -- ;
-					board[i][j] = 10;
-				}
 				 else {
 					board[i][j] = 0;
 				}
@@ -194,6 +200,7 @@ function Start() {
 		
 	}
 	setFoodRemaine();
+	setLifeAndSlow();
 	//click
 	keysDown = {};
 	addEventListener(
@@ -211,11 +218,21 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-	intervalMonster =setInterval(UpdatePositionMonsters,400);
+	intervalMonster =setInterval(UpdatePositionMonsters,350);
 	interval2= setInterval(UpdatePostionpizza,300);
 }
 
+function setLifeAndSlow(){
+	let emptyCell =  findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 10;
+	emptyCell =  findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 11;
+	emptyCell =  findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 12;
+	emptyCell =  findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 13;
 
+}
 function setFoodRemaine(){
 	//food_remain= food_remain-food5-food25-food15;
 	while (food_remain > 0) {//all remain sweets
@@ -311,13 +328,12 @@ function Draw() {
 					DrawEye(eyeX,eyeY,center_x,center_y);				
 				}
 			} 
-			else if(board[i][j]==7){ //pizza
+			else if(board[i][j]==7){      //pizza
 				let x1 = pizza[0] * 50 + 30;
 				let y1 = pizza[1] * 50 + 30;
 				context.beginPath();
-				context.arc(x1, y1 , 15, 0, 2 * Math.PI); // circle
-				context.strokeStyle = '#0099b0';
-				context.stroke();
+				let pizzaImg = document.getElementById('pizza');
+				context.drawImage(pizzaImg,x1-20, y1-20 ,30,30);
 				context.fill();
 				// context.fillStyle = "black"; //color
 				// context.fill();
@@ -337,12 +353,32 @@ function Draw() {
 				context.drawImage(monImg,center.x-20, center.y-20,40,40);
 				 context.fill();
 			}
-			else if(board[i][j] == 10){
+			else if(board[i][j] == 10){  // slow motion
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black";
+				let slowImg = document.getElementById('slow');
+				context.drawImage(slowImg,center.x-20, center.y-20,40,40);
+				context.fill();
+			
+			}else if(board[i][j] == 11){  // plus 1 life
+				context.beginPath();
+				let Img1 = document.getElementById('+1Img');
+				context.drawImage(Img1,center.x-20, center.y-20,40,40);
 				context.fill();
 			}	
+			else if(board[i][j] == 12){  // plus 2 life
+				context.beginPath();
+				let Img2 = document.getElementById('+2Img');
+				context.drawImage(Img2,center.x-20, center.y-20,40,40);
+				context.fill();
+			}
+			else if(board[i][j] == 13){  // minus 1 life
+				context.beginPath();
+				let Img1min = document.getElementById('-1Img');
+				context.drawImage(Img1min,center.x-20, center.y-20,40,40);
+				context.fill();
+			}
+			
+
 		}
 	}
 }
@@ -409,49 +445,61 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {
+
+	if (board[shape.i][shape.j] == 1) { // 5 points
 		score = score+5;
+		leftToEat--;
 	}
-	if (board[shape.i][shape.j] == 3) {
+	else if (board[shape.i][shape.j] == 3) { // 15 pounts
 		score = score+15;
+		leftToEat--;
 	}
-	if (board[shape.i][shape.j] ==5) {
+	else if (board[shape.i][shape.j] ==5) { //25 point
 		score = score+25;
+		leftToEat--;
 	}
-	if(board[shape.i][shape.j] ==7){
+	else if(board[shape.i][shape.j] ==7){  // move food, 50 points
 		window.clearInterval(interval2);
 		score = score+50;
+		leftToEat--;
 	}
-	if(board[shape.i][shape.j] == 10){
+	else if(board[shape.i][shape.j] == 10){ //slow motion
 		clearInterval(intervalMonster);
-		intervalMonster = setInterval(UpdatePositionMonsters, 600);
+		intervalMonster = setInterval(UpdatePositionMonsters, 550);
+		flagSlowMotion = false;
 	}
-	
-	// UpdatePositionMonsters()
+	else if(board[shape.i][shape.j]==11){ // plus one life
+		lifeGame++;
+	}
+	else if(board[shape.i][shape.j]==12){ // plus 2 life
+		lifeGame = lifeGame + 2;
+	}
+	else if(board[shape.i][shape.j]==13){ // minus one life
+		if(lifeGame>0){
+		lifeGame--;
+		}
+		
+	}
 
-
-	//monster one step from pac
-	// if (pacCloseToMonster()){
-	// if(board[shape.i][shape.j]==6){
-	// 	rejection()
-	// }
-	// else{
 	board[shape.i][shape.j] = 2;
-	
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = (timeGame - time_elapsed).toFixed(0);
+	
+	if(leftToEat==0){
+		alert("winner!! good job")
+	}
 	if( time_remain <= 0){
 		clearAllInterval();
 		if(score<100){
-			window.alert("You are better than"+ score + "points");
+			window.alert("You are better than "+ score + " points");
 		}
 		else{
 			alert("WINNER!!")
 		}
 		
 	}
-	if (score >= 30 && time_elapsed <= 10) {
+	if (score >= 30 && time_remain <= 10) {
 		pac_color = "green";
 	}
 	if (score == 1000) {
@@ -609,6 +657,12 @@ function UpdatePositionMonsters()
 function rejection(){
 	if (lifeGame != 0) 
 		{
+			if(flagSlowMotion == false){
+				clearInterval(intervalMonster);
+				intervalMonster = setInterval(UpdatePositionMonsters,350);
+				flagSlowMotion = true;
+			}
+
 			lifeGame = lifeGame -1;
 			if(score-10 < 0)
 			{
@@ -636,7 +690,6 @@ function rejection(){
 				//document.getElementById('myElem').style.visibility='visible';				
 			}
 			//document.getElementById('myElem').style.visibility='hidden';
-					
 		}
 		else //live is over
 		{
@@ -667,7 +720,7 @@ function UpdatePostionpizza(){
 	i=pizza[0];
 	j=pizza[1];
 	let flag=true;
-	let listWithoutFood= [1,3,5,0,10];
+	let listWithoutFood= [1,3,5,0,10,11,12,13];
 	let NewPos;
 	while(flag==true){
 		NewPos = Math.floor(Math.random()*(5-1))+1;
@@ -709,7 +762,7 @@ function UpdatePostionpizza(){
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
-	var foods = [1,3,5,7,10];
+	var foods = [1,3,5,7,10,11,12,13];
 	if(foods.includes(monsterOnsweets[monInd])){
 		board[i][j] = monsterOnsweets[monInd];
 	}

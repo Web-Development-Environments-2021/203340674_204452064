@@ -272,6 +272,8 @@ function clearText(){
     document.getElementById("color25").value = "";
     document.getElementById("timeForGame").value = "";
     document.getElementById("numOfMansterIn").value = "";
+    // document.getElementById("settingsbutton").display=true;
+
 }
 
 // function chooseKeys(){

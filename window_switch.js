@@ -15,6 +15,7 @@ function switchToGame(){
     $('#settings_window').css({top:'40%' , left:'70%'});
     $("#settings_window").show();
     $('#settingsbutton').hide();
+    $('#resetButton').hide();
     $('#randombutton').hide();
     $('#pForchooseKey').hide();
     $('#pForchooseBalls').hide();
