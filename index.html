@@ -3,7 +3,7 @@
 
 <head>
 	<script src="./jquery-3.4.1.slim.min.js"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
 	<script type="text/javascript" src="./register.js"></script>
 	<script type="text/javascript" src="./login.js"></script>
@@ -125,7 +125,8 @@
 				<input id="lblTime" type="text" />
 			</div>
 			<div id="newGame">
-				<button type="button" class="button" onclick="newGame()" style="font-size: 15px; margin-left: 30px; ">NEW GAME</button>
+				<button type="button" class="button" onclick="newGame()"
+					style="font-size: 15px; margin-left: 30px; ">NEW GAME</button>
 			</div>
 			<!-- <div id= "gameShow" class="gameShow"> -->
 			<div id="game" class="game">
@@ -138,21 +139,22 @@
 				<img id="background" src="background.jpg">
 			</div>
 			<div style="display:none;">
-				<img id = "-1Img" src="-1.png">
+				<img id="-1Img" src="-1.png">
 			</div>
 			<div style="display:none;">
-				<img id = "+1Img" src="+1.png">
+				<img id="+1Img" src="+1.png">
 			</div>
 			<div style="display:none;">
-				<img id = "+2Img" src="+2.png">
+				<img id="+2Img" src="+2.png">
 			</div>
 			<div style="display:none;">
-				<img id = "slow" src="slow.png">
+				<img id="slow" src="slow.png">
 			</div>
 			<div style="display:none;">
-				<img id = "pizza" src="pizza.jpg">
+				<img id="pizza" src="pizza.jpg">
 			</div>
-			
+
+
 			<!-- </div> -->
 			<!-- <audio id="songGame" > 
 			</audio> -->
@@ -171,17 +173,17 @@
 		</div>
 
 		<div id="settings_window" class="settings_window">
-			
-				<div id="pForchooseKey" class="paragraph" style="display: block; font-size:40px; ">
-					<br>
-					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings page
-					</b>
-					<br>
-					<br>
-				</div>
-				<div class="settinsKeys">
+
+			<div id="pForchooseKey" class="paragraph" style="display: block; font-size:40px; ">
+				<br>
+				<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings page
+				</b>
+				<br>
+				<br>
+			</div>
+			<div class="settinsKeys">
 				<div id="press">
-				<b>press button and fill the key:</b> 
+					<b>press button and fill the key:</b>
 				</div>
 				<br>
 				<br>
@@ -206,7 +208,8 @@
 				<br>
 				<br>
 				<label for="numofballs">number of sweets (between 50-90)&nbsp;</label>
-				<input type="text" name="ballsToEat" id="ballsToEat" min="50" max="90" oninput="checkForBalls()" style="width: 50px;">
+				<input type="text" name="ballsToEat" id="ballsToEat" min="50" max="90" oninput="checkForBalls()"
+					style="width: 50px;">
 				<br>
 				<br>
 				<label for="timeForGame">time for the game (more then 60)&nbsp;</label>
@@ -215,11 +218,12 @@
 				<br>
 				<br>
 				<label for="manster">number of munster (between 1-4)&nbsp;</label>
-				<input type="number" name="numOfMansterIn" id="numOfMansterIn" oninput="checkForManster()" style="width: 50px;">
+				<input type="number" name="numOfMansterIn" id="numOfMansterIn" oninput="checkForManster()"
+					style="width: 50px;">
 			</div>
 			<div class="settingsColours">
 				<br>
-				<br>			
+				<br>
 				<label for="color5ball">color for 5 point&nbsp;</label>
 				<input type="color" name="color5" id="color5" style="width: 50px;" required><br>
 				<br>
@@ -230,15 +234,18 @@
 				<input type="color" name="color25" id="color25" style="width: 50px;" required>
 				<br>
 				<br>
-				<button type="submit" class="button"  onclick="settings()" id="settingsbutton"  disabled>Start game</button>
+				<button type="submit" class="button" onclick="settings()" id="settingsbutton" disabled>Start
+					game</button>
 				<br>
 				<br>
-				<button type="submit" class="button" onclick="randomSettings()" id="randombutton">Random settings</button>
+				<button type="submit" class="button" onclick="randomSettings()" id="randombutton">Random
+					settings</button>
 				<br>
 				<br>
-				<button type="submit" class="button" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
+				<button type="submit" class="button" onclick="clearText()" id="resetButton"
+					style="display:none;">Reset</button>
 			</div>
-			
+
 			<!-- <div class="settingsButtons">
 			<button type="submit" class="button" onclick="settings()" id="settingsbutton" disabled>Start game</button>
 			<button type="submit" class="button" onclick="randomSettings()" id="randombutton">Random settings</button>
@@ -249,21 +256,25 @@
 
 	</div>
 
-	<div id="myModal" class="modal">
-		<div class="modal-content">
-			<dialog id="modal-dialog"></dialog>
-			<span class="close">&times;</span>
+
+	<dialog id="modal-dialog">
+		<div class="modal-dialog-class">
+			<span class="close" onclick="closedialog()">&times;</span>
 			<br>
 			<p>Shay Erlich & Hallel Helfand</p>
 			<p>we use jQuery Validation Plugin to validate the user details</p>
 			<p>we design the game from basic</p>
 			<p>the most difficult thing was to debug and detected problems.</p>
 			<p>It was fun to work in front-hand but takes time to use it.</p>
-			</dialog>
 		</div>
-	</div>
+	</dialog>
 
-	<!-- <div class="footer">
+
+
+
+
+
+	<div class="footer">
 		<a>&nbsp;&nbsp;hallel mail&nbsp;</a>
 		<a href="mailto:hallelh@post.bgu.ac.il">hallelh@post.bgu.ac.il</a>
 		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shay mail&nbsp;</a>
@@ -271,12 +282,7 @@
 		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pac-Man is a
 			maze arcade game developed and released by Namco in 1980 </a>
 		<a>, and now we implement our own pacman :) </a>
-	</div> -->
-
-
-
-
-
+	</div>
 </body>
 
 </html>

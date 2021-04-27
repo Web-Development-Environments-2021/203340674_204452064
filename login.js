@@ -1,5 +1,5 @@
 // import {users} from './register.js';
-
+var playerName = "";
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 
@@ -25,6 +25,7 @@ function checkUserExist(){
     if(checkInDatabase(inputUser,inputPass)){
         // document.getElementById("login_window").style.display= "none";
         // document.getElementById("game_window").style.display="block";
+        playerName = inputUser;
         switchTosettings(); 
     }
     else{

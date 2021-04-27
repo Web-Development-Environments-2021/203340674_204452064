@@ -34,26 +34,57 @@ function switchToWelcome(){
     $('#first_window').show();
 }
 function switchDialogAboout(){
-    $('#myModal').show()
-    //esc press
-    $(document).on('keydown',function(e)
-    {
-        if(e.keyCode == 27)
-        {
-            $('#myModal').hide();
-        }
-    })
+ 
+    $('#modal-dialog').show()
+    // esc press
+    // $(document).on('keydown',function(e)
+    // {
+    //     if(e.keyCode == 27)
+    //     {
+    //         $('#modal-dialog').hide();
+    //     }
+    // })
     //X button
-    $('#close').click(function()
-    {
-        $('#myModal').hide()
-    })
-    $(document).on('mousedown',function(e)
-    {
-            $('#myModal').hide();
+    // $('#close').click(function()
+    // {
+    //     $('#modal-dialog').hide()
+    // })
+    // window.onclick = function(event){
+    //     if(event.target == document.getElementById('modal-dialog')){
+    //         $('#modal-dialog').hide()
+    //     }
+    // }
+    // $(document).on('mousedown',function(e)
+    // {
+    //         $('#modal-dialog').hide();
         
-    })
+    // })
+    
 }
+$(function(){
+	window.onclick = function(event) {
+
+		if (event.target == document.getElementById("modal-dialog")) {
+            
+			closedialog();
+			switchToWelcome();
+
+		}
+	  }
+	window.addEventListener('keyup', function(event) {
+		// If  ESC key was pressed...
+		if (event.keyCode == 27) {
+			// try close your dialog
+			closedialog();
+			switchToWelcome();
+		}
+	});
+})
+function closedialog(){
+    document.getElementById("modal-dialog").style.display = "none";
+    switchToWelcome();
+}
+
 
 function switchTosettings(){
     $('#windows').children().hide();

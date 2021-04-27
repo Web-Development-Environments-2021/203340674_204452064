@@ -197,7 +197,6 @@ function readOnlyStettings(){
 function updateForNewGame(){
     $('#settings_window').css({left:'28%',top:'20%'});
     $('#settingsbutton').show();
-    document.getElementById("settingsbutton").disabled= false;
     $('#randombutton').show();
     $('#pForchooseKey').show();
     $('#pForchooseBalls').show();
@@ -215,6 +214,7 @@ function updateForNewGame(){
     document.getElementById("color25").readOnly= false;
     document.getElementById("timeForGame").readOnly= false;
     document.getElementById("numOfMansterIn").readOnly= false;
+    buttonAble();
     
 }
 

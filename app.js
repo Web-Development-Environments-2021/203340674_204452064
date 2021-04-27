@@ -290,7 +290,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblPlayerName.value = document.getElementById("usernamelogin").value;;
+	lblPlayerName.value = playerName;
 	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
@@ -401,7 +401,7 @@ function DrawDiffFood(num,x,y){
 	}
 	context.fill();
 }
-
+//draw pac depending on direction
 function DrawBody(startAngle,endAngle,center_x,center_y){
 	start = startAngle;
 	end = endAngle;
@@ -413,6 +413,7 @@ function DrawBody(startAngle,endAngle,center_x,center_y){
 	
 
 }
+//draw pac's eye depending on direction
 function DrawEye(locX,locY,center_x,center_y){
 	eyeX = locX;
 	eyeY = locY
@@ -519,7 +520,7 @@ function clearAllInterval(){
 	window.clearInterval(interval);
 	window.clearInterval(interval2);
 }
-
+//check if monster and pac in same cell
 function pacCloseToMonster(){
 	for (var ind=0; ind<monsterList.length; ind++){
 		if(Math.abs(shape.i - monsterList[ind].i) < 1 && Math.abs(shape.j - monsterList[ind].j) < 1){
@@ -529,6 +530,7 @@ function pacCloseToMonster(){
 	return false;
 
 }
+//call every new game to locate the monsters
 function locateMonster(monsterLoc)
 {
 	monsterOnsweets=[0,0,0,0];
@@ -654,7 +656,7 @@ function UpdatePositionMonsters()
 	}
 	Draw();
 }
-
+//call every time monster hit packman
 function rejection(){
 	if (lifeGame != 0) 
 		{
@@ -694,6 +696,7 @@ function rejection(){
 		}
 		else //live is over
 		{
+			
 			window.clearInterval(intervalMonster);
 			window.clearInterval(interval);
 			window.clearInterval(interval2);

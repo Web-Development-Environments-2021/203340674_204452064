@@ -87,15 +87,8 @@ p{
     top: 30%;
 
 }
-#modal-dialog{
-    position: absolute;
-    top: 30%;
-    background-color: rgb(8, 8, 49);
-    
-
- }
- .modal {
-    display: none; /* Hidden by default */
+#modal-dialog {
+  display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -106,13 +99,16 @@ p{
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  .modal-content {
+  .modal-dialog-class {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 40%; /* Could be more or less, depending on screen size */
+    width: 30%; /* Could be more or less, depending on screen size */
   }
+
+
+ 
   
   /* The Close Button */
   .close {
@@ -122,9 +118,7 @@ p{
     font-weight: bold;
     margin-right: 15px;
     margin-top: 8px;
-    
-
-  }
+      }
   
   .close:hover,
   .close:focus {
@@ -143,6 +137,15 @@ p{
     color: white;
     /* text-align: center; */
     font-size: 16px;
+  }
+  #winer{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
   }
 
 
