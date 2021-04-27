@@ -234,8 +234,9 @@ function sound(src) {
     }
   }
 
-var counterForSetButtoml=0; 
+var counterForSetButtoml=0;
 
+//check the value input of number of balls
 function checkForBalls(){
     let tempNumFood = document.getElementById("ballsToEat").value;
     if(tempNumFood>=50 && tempNumFood <=90){
@@ -247,6 +248,7 @@ function checkForBalls(){
     }
 }
 
+//check the value time input
 function checkFortime(){
     let tempTime = document.getElementById("timeForGame").value;
     if(tempTime>=60){
@@ -257,6 +259,7 @@ function checkFortime(){
     }
 }
 
+//check the value manster input
 function checkForManster(){
     let tempMunster = document.getElementById("numOfMansterIn").value;
     if(tempMunster>=1 && tempMunster<=4){
@@ -266,12 +269,15 @@ function checkForManster(){
         buttonAble()
     } 
 }
+
+//open the settings button if the value is correct
 function buttonAble(){
     $('#settingsbutton').css({background:'#c9367a'});
     document.getElementById("settingsbutton").disabled =false;
 
 }
 
+//clear the text area 
 function clearText(){
     document.getElementById("up").value = "";
     document.getElementById("down").value = "";
