@@ -12,7 +12,7 @@ function switchToRegister(){
 function switchToGame(){
     $('#windows').children().hide();
     $('#game_window').show();
-    $('#settings_window').css({top:'40%' , left:'62%'});
+    $('#settings_window').css({top:'40%' , left:'65%'});
     $("#settings_window").show();
     $('#settingsbutton').hide();
     $('#resetButton').hide();

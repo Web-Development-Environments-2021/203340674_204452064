@@ -23,10 +23,15 @@
     bottom : 40px
     
 }
-#player_name, #score, #life, #time, #newGame {
+#player_name, #score, #life, #time {
     display:inline-block;
     margin-left: 20px;
     bottom:0px;
+}
+#newGame{
+    display:inline-block;
+    margin-left: 250px;
+    
 }
 #lblPlayerName, #lblScore, #lblLife, #lblTime{
     width: 50px;

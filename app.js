@@ -76,7 +76,7 @@ function newGame(){
 
 function EmptyCellForMonster(){
 	var cellsOfMonsters = [] //location of monster
-	var corners=[[0,0],[width-1,0],[0,height-1],[height-1,width-1]]; // all corners
+	var corners=[[0,0],[width-1,0],[0,height-1],[width-1,height-1]]; // all corners
 	var monstersRemain = numOfManster;
 	var ind=0;
 	while(monstersRemain!=0){
