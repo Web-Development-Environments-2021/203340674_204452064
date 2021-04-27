@@ -23,7 +23,7 @@ var leftkey=37;
 
 //food
 var food_remain;
-var leftToEat;
+var leftToEat=0;
 var food5;
 var food15;
 var food25;
@@ -123,13 +123,14 @@ function removeMonsterFromLastRound(){
 function Start() {
 	//initial score&time	
 	board = new Array();
-	pizza= [5,8];
-	soundGame = new sound("test.mp3");
+	pizza= [8,5];
+	soundGame = new sound("background_sound.mp3");
 	soundGame.play();
 	lifeGame=5;
 	slowMotiom = 1;
 	flagSlowMotion= true;
-	leftToEat= food_remain +1;
+	leftToEat = food_remain;
+	leftToEat++;
 	score = 0;
 	plusLife1 = 1;
 	plusLife2 = 1;
@@ -167,7 +168,7 @@ function Start() {
 			) {
 				board[i][j] = 4;
 			 }
-			else if(i==5 && j==8){
+			else if(i==8 && j==5){
 				board[i][j] = 7
 			} 
 			else {
@@ -225,6 +226,7 @@ function Start() {
 	interval2= setInterval(UpdatePostionpizza,300);
 }
 
+//set the lifeImg and slowImg in random position
 function setLifeAndSlow(){
 	let emptyCell =  findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 10;
@@ -236,6 +238,8 @@ function setLifeAndSlow(){
 	board[emptyCell[0]][emptyCell[1]] = 13;
 
 }
+
+// set all the food in the board
 function setFoodRemaine(){
 	//food_remain= food_remain-food5-food25-food15;
 	while (food_remain > 0) {//all remain sweets
@@ -338,8 +342,7 @@ function Draw() {
 				let pizzaImg = document.getElementById('pizza');
 				context.drawImage(pizzaImg,x1-20, y1-20 ,30,30);
 				context.fill();
-				// context.fillStyle = "black"; //color
-				// context.fill();
+				
 			}
 			else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
 				DrawDiffFood(board[i][j],center.x,center.y);
@@ -389,7 +392,7 @@ function Draw() {
 // draw the food in different color
 function DrawDiffFood(num,x,y){
 	context.beginPath();
-	context.arc(x, y, 15, 0, 2 * Math.PI); // circle
+	context.arc(x, y, 12, 0, 2 * Math.PI); // circle
 	if(num==1){
 		context.fillStyle = color5Point;
 	}
@@ -480,7 +483,6 @@ function UpdatePosition() {
 		if(lifeGame>0){
 		lifeGame--;
 		}
-		
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -488,7 +490,8 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = (timeGame - time_elapsed).toFixed(0);
 	
-	if(leftToEat==0){
+	if(leftToEat<=0){
+		clearAllInterval();
 		alert("winner!! good job")
 	}
 	if( time_remain <= 0){
@@ -702,67 +705,52 @@ function rejection(){
 
 	}
 
-function checkAllDir(i,j){
-	let listWithoutFood= [2,4,6];
-	if(i == 0){
-
-	}
-	if(listWithoutFood.includes(board[i+1][j])
-	 && listWithoutFood.includes(board[i-1][j]) && 
-	 listWithoutFood.includes(board[i][j-1]) &&
-	 listWithoutFood.includes(board[i][j+1])){
-		alert("cant move");
-		return false;
-	}
-	return true;
-}
 
 //update the move of the pizza object
 function UpdatePostionpizza(){
 	i=pizza[0];
 	j=pizza[1];
 	let flag=true;
-	let listWithoutFood= [1,3,5,0,10,11,12,13];
-	let NewPos;
 	while(flag==true){
 		NewPos = Math.floor(Math.random()*(5-1))+1;
 		if(NewPos == 1){//down
-			if(i< width-1 && listWithoutFood.includes(board[i+1][j])){
-				pizza[2] = board[i+1][j];
-				board[i+1][j] = 7;
+			if(i< width-1 && board[i+1][j]!=4){
 				pizza[0]= i+1;
 				flag= false;
 			}
 		}
 		else if(NewPos==2){ //up
-			if(i>0 && listWithoutFood.includes(board[i-1][j])){
-				pizza[2] = board[i-1][j];
-				board[i-1][j]=7;
+			if(i>0 && board[i-1][j]!=4){
 				pizza[0]= i-1;
 				flag= false;
 			} 
 		}
 		else if(NewPos==3){//left
-			if(j>0 && listWithoutFood.includes(board[i][j-1])){
-				pizza[2] = board[i][j-1];
-				board[i][j-1]=7;
+			if(j>0 && board[i][j-1]!=4){
 				pizza[1]= j-1;
 				flag= false;
 			}
 		}
 		else if(NewPos==4){//right
-			if(j<height-1 && listWithoutFood.includes(board[i][j+1])){
-				pizza[2] = board[i][j+1];
-				board[i][j+1]=7;
+			if(j<height-1 && board[i][j+1] != 4){
 				pizza[1] = j+1;
 				flag = false;
 			}
 		}
 	}
-	board[i][j]=pizza[2];
+	if(pizza[2]!= undefined && pizza[2]!= 6){
+		board[i][j]=pizza[2];
+	}
+	else{
+		board[i][j]=0;
+	}
+	
 	if(board[pizza[0]][pizza[1]]==2){
 		pacmanEatPizza();
-		board[pizza[0]][pizza[1]]=2;
+	}
+	else{
+		pizza[2]= board[pizza[0]][pizza[1]];
+		board[pizza[0]][pizza[1]]=7;
 	}
 	Draw();
 }
