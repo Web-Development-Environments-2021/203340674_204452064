@@ -116,7 +116,7 @@
 				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
 			</div>
-			<div id= "life">
+			<div id="life">
 				<label for="lblLife">LIFE GAME:</label>
 				<input id="lblLife" type="text" />
 			</div>
@@ -125,92 +125,110 @@
 				<input id="lblTime" type="text" />
 			</div>
 			<div id="newGame">
-				<button type="button" onclick="newGame()" style="font-size: x-large; font-family: 'papyrus', fantasy;">NEW GAME</button>
+				<button type="button" class="button" onclick="newGame()" style="font-size: 15px; ">NEW GAME</button>
 			</div>
 			<!-- <div id= "gameShow" class="gameShow"> -->
 			<div id="game" class="game">
 				<canvas id="canvas" height="500" width="800"></canvas>
 			</div>
 			<div style="display:none;">
-				<img id = "monImg" src="monster.png">
+				<img id="monImg" src="monster.png">
 			</div>
 			<div style="display:none;">
-				<img id = "background" src="background.jpg">
+				<img id="background" src="background.jpg">
 			</div>
 			<!-- </div> -->
 			<!-- <audio id="songGame" > 
 			</audio> -->
-				<!-- <iframe width="560" 
+			<!-- <iframe width="560" 
 				height="315" 
 				src="https://www.youtube.com/embed/fwY4EJRM7ak" 
 				title="YouTube video player" frameborder="0"
 				autoplay=1 
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 				allowfullscreen> -->
-				<!-- </iframe>
+			<!-- </iframe>
 			<embed name="musicGame" 
 			src="https://youtu.be/fwY4EJRM7ak" 
 			loop="true" hidden="false" 
-			autostart="true"/> --> 
+			autostart="true"/> -->
 
 		</div>
-	
-		<div id= "settings_window" class="settings_window">
-			<p id="pForchooseKey" style="display: block;"><b>Settings page <br> please choose keys for the game:</b></p>
-			<button id="buttonUp" onclick="ChoosekeyUp()" >UP</button>
-			<label for="up">up Key</label>
-			<input type="text" name = "up" id ="up" readonly>
-			<br>
-			<button id="buttonDown" onclick="ChoosekeyDown()" disabled>Down</button>
-			<label for="down">down Key</label>
-			<input type="text" name = "down" id ="down" readonly>
-			<br>
-			<button id="buttonLeft" onclick="ChoosekeyLeft()" disabled>Left</button>
-			<label for="left">left Key</label>
-			<input type="text" name = "left" id ="left" readonly>
-			<br>
-			<button id="buttonRight" onclick="ChoosekeyRight()" disabled>Right</button>
-			<label for="right">rightKeys</label>
-			<input type="text" name = "right" id ="right" readonly>
 
-			<br>
-
-			<p id="pForchooseBalls">please choose number of balls:</p>
-			<label for="numofballs">number of balls</label>
-
-			<input type="text" name="ballsToEat" id="ballsToEat" min="50" max="90" oninput="checkForBalls()">
-
-			<br>
-
-			<!-- <button type="button" onclick="chooseBalls()">OK</button> -->
-			<p id="pForchoosecolor">please choose a color for each kind:</p>
-
-			<label for="color5ball">color for 5 point</label>		   
-			<input type="color" name ="color5" id ="color5" required><br>
-			<label for="color5ball">color for 15 point</label>		   
-			<input type="color" name ="color15" id ="color15" required><br>
-			<label for="color5ball">color for 25 point</label>		   
-			<input type="color" name ="color25" id ="color25" required>
-
-
-			<br>
-			<!-- <button type="button" onclick="chooseColorBall()">OK</button> -->
-			<p id="pForchoosetime">please choose time for the game:</p>
-
-			<label for="timeForGame">time for the game</label>
-			<input type="number" name="timeForGame" id="timeForGame" oninput="checkFortime()">
-			<!-- <button type="button" onclick="chooseTimePlay()">OK</button> -->
-
-			<p id="pForchoosemanster">please choose number for manster:</p>
-			<br>
-			<label for="manster">number of munster</label>
-			<input type="number" name="numOfMansterIn" id="numOfMansterIn" oninput="checkForManster()">
-			<br>
-			<!-- <button type="button" onclick="chooseNumOfmanster()">OK</button> -->
-			<button type="submit" onclick="settings()" id="settingsbutton" disabled>Start game</button>
-			<button type="submit" onclick="randomSettings()" id="randombutton">Random settings</button>
-			<button type="submit" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
-
+		<div id="settings_window" class="settings_window">
+			
+				<div id="pForchooseKey" class="paragraph" style="display: block; font-size:40px; ">
+					<br>
+					<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Settings page
+					</b>
+					<br>
+					<br>
+				</div>
+				<div class="settinsKeys">
+				<div id="press">
+				<b>press button and fill the key:</b> 
+				</div>
+				<br>
+				<br>
+				<button id="buttonUp" onclick="ChoosekeyUp()">UP</button>
+				<label for="up">up Key</label>
+				<input type="text" name="up" id="up" style="width: 50px;" readonly>
+				<br>
+				<br>
+				<button id="buttonDown" onclick="ChoosekeyDown()" disabled>Down</button>
+				<label for="down">down Key</label>
+				<input type="text" name="down" id="down" style="width: 50px;" readonly>
+				<br>
+				<br>
+				<button id="buttonLeft" onclick="ChoosekeyLeft()" disabled>Left</button>
+				<label for="left">left Key</label>
+				<input type="text" name="left" id="left" style="width: 50px;" readonly>
+				<br>
+				<br>
+				<button id="buttonRight" onclick="ChoosekeyRight()" disabled>Right</button>
+				<label for="right">rightKeys</label>
+				<input type="text" name="right" id="right" style="width: 50px;" readonly>
+				<br>
+				<br>
+				<label for="numofballs">number of sweets (between 50-90)&nbsp;</label>
+				<input type="text" name="ballsToEat" id="ballsToEat" min="50" max="90" oninput="checkForBalls()" style="width: 50px;">
+				<br>
+				<br>
+				<label for="timeForGame">time for the game (more then 60)&nbsp;</label>
+				<input type="number" name="timeForGame" id="timeForGame" oninput="checkFortime()" style="width: 50px;">
+				<!-- <button type="button" onclick="chooseTimePlay()">OK</button> -->
+				<br>
+				<br>
+				<label for="manster">number of munster (between 1-4)&nbsp;</label>
+				<input type="number" name="numOfMansterIn" id="numOfMansterIn" oninput="checkForManster()" style="width: 50px;">
+			</div>
+			<div class="settingsColours">
+				<br>
+				<br>			
+				<label for="color5ball">color for 5 point&nbsp;</label>
+				<input type="color" name="color5" id="color5" style="width: 50px;" required><br>
+				<br>
+				<label for="color5ball">color for 15 point&nbsp;</label>
+				<input type="color" name="color15" id="color15" style="width: 50px;" required><br>
+				<br>
+				<label for="color5ball">color for 25 point&nbsp;</label>
+				<input type="color" name="color25" id="color25" style="width: 50px;" required>
+				<br>
+				<br>
+				<button type="submit" class="button" onclick="settings()" id="settingsbutton"  disabled>Start game</button>
+				<br>
+				<br>
+				<button type="submit" class="button" onclick="randomSettings()" id="randombutton">Random settings</button>
+				<br>
+				<br>
+				<button type="submit" class="button" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
+			</div>
+			
+			<!-- <div class="settingsButtons">
+			<button type="submit" class="button" onclick="settings()" id="settingsbutton" disabled>Start game</button>
+			<button type="submit" class="button" onclick="randomSettings()" id="randombutton">Random settings</button>
+			<button type="submit" class="button" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
+			</div> -->
 
 		</div>
 
@@ -232,15 +250,15 @@
 		</div>
 	</div>
 
-	<!-- <div class="footer">
+	<div class="footer">
 		<a>&nbsp;&nbsp;hallel mail&nbsp;</a>
 		<a href="mailto:hallelh@post.bgu.ac.il">hallelh@post.bgu.ac.il</a>
 		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shay mail&nbsp;</a>
-		<a href="mailto:shaier@post.bgu.ac.il" shaier@post.bgu.ac.il></a>
+		<a href="mailto:shaier@post.bgu.ac.il">shaier@post.bgu.ac.il></a>
 		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pac-Man is a
 			maze arcade game developed and released by Namco in 1980 </a>
 		<a>, and now we implement our own pacman :) </a>
-	</div> -->
+	</div>
 
 
 
