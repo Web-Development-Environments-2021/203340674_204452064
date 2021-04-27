@@ -10,35 +10,36 @@
 	<script type="text/javascript" src="./window_switch.js"></script>
 	<script type="text/javascript" src="./Settings.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style.css" />
+	<link rel="stylesheet" type="text/css" href="./settingStyle.css" />
 </head>
 <title>GameSHpackwoman</title>
 
 <body>
 	<header>
 		<div id="mainLogo"></div>
-			<img src="logo.png" alt="logo" width="143" height="100">
-			<p>GameSHpackman</p>
-		</div>	
+		<img src="logo.png" alt="logo" width="143" height="100">
+		<p>GameSHpackman</p>
+		</div>
 	</header>
 	<div class="menu">
-		<a  onclick="switchToWelcome()">Welcome</a>
-		<a  onclick="switchToRegister()">Register</a>
-		<a  onclick="switchToLogin()">Login</a>
-		<a id = "about" onclick = "switchDialogAboout()">About</a>
+		<a onclick="switchToWelcome()">Welcome</a>
+		<a onclick="switchToRegister()">Register</a>
+		<a onclick="switchToLogin()">Login</a>
+		<a id="About" onclick="switchDialogAboout()">About</a>
 	</div>
-	<div id = "windows" class="windows">
-	
+	<div id="windows" class="windows">
+
 		<div id="first_window" class="first_window">
 			<div id="logo">
 				<img src="logo.png" alt="logo" width="480" height="440">
 			</div>
 
-			<div id="login" >
-				<button class="button"  onclick="switchToLogin()">Login</button>
+			<div id="login">
+				<button class="button" onclick="switchToLogin()">Login</button>
 
 			</div>
 
-			<div id="register" >
+			<div id="register">
 				<button class="button" onclick="switchToRegister()">Register</button>
 			</div>
 		</div>
@@ -50,32 +51,85 @@
 					<label for="Uname">user Name</label>
 				</div>
 				<div>
-					<input name="username" id = "username" placeholder="Name" type="text">
+					<input name="username" id="username" placeholder="Name" type="text">
 				</div>
 				<br>
 				<br>
-			<div class="label-form">
-				<label for="Emailn">Email</label>
+				<div class="label-form">
+					<label for="Emailn">Email</label>
+				</div>
+				<div>
+					<input name="email" id="email" placeholder="Email Address" type="text">
+				</div>
+				<br>
+				<br>
+				<div class="label-form">
+					<label for="psw">Password</label>
+				</div>
+				<div>
+					<input name="password" id="password" placeholder="Password" type="password">
+				</div>
+				<br>
+				<br>
+				<div class="label-form">
+					<label for="fullname">Fullname</label>
+				</div>
+				<div>
+					<input name="fullname" id="fullname" placeholder="Full name" type="text">
+				</div>
+				<br>
+				<div class="label-form">
+					<label for="brth">Birthday</label>
+				</div>
+				<input type="date" id="birthday" name="birthday">
+				<br>
+				<br>
+				<input type="button" class="button" id="submit-button" type="submit" value="Register"
+					onclick="addUser()">
+			</form>
+		</div>
+
+		<div id="login_window">
+			<form>
+				<div class="label-form">
+					<label for="Uname">user Name</label>
+				</div>
+				<input type="text" name="name" id="usernamelogin" required>
+				<br>
+				<br>
+				<div class="label-form">
+					<label for="psw">Password</label>
+				</div>
+				<input type="password" name="psw" id="psw_login" required>
+				<br>
+				<br>
+				<button type="button" class="button" onclick="checkUserExist()">login</button>
+				<br>
+			</form>
+		</div>
+
+		<div id="game_window">
+		
+			<div id="player_name">
+				<input id="lblPlayerName" type="text" />
 			</div>
-			<div>
-				<input name="email" id = "email" placeholder="Email Address" type="text">
+			<div id="score" >
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
 			</div>
-			<br>
-			<br>
-			<div class="label-form">
-				<label for="psw">Password</label>
+			<div id="life" >
+				<label for="lblLife">LIFE GAME:</label>
+				<input id="lblLife" type="text" />
 			</div>
-			<div>
-				<input name="password" id="password" placeholder="Password" type="password">
+			<div id="time" >
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
 			</div>
-			<br>
-			<br>
-			<div class="label-form">
-				<label for="fullname">Fullname</label>
+			<div id="newGame" >
+				<button type="button" onclick="newGame()"
+					style="font-size: x-large; font-family: 'papyrus', fantasy;">NEW GAME</button>
 			</div>
-			<div>
-				<input name="fullname" id = "fullname" placeholder="Full name" type="text">
-			</div>
+
 			<br>
 			<div class="label-form">
 				<label for="brth">Birthday</label>
@@ -170,15 +224,19 @@
 			<button id="buttonRight" onclick="ChoosekeyRight()" disabled>Right</button>
 			<label for="right">rightKeys</label>
 			<input type="text" name = "right" id ="right" readonly>
+
 			<br>
 
 			<p id="pForchooseBalls">please choose number of balls:</p>
 			<label for="numofballs">number of balls</label>
-			<input type="text" name ="ballsToEat" id ="ballsToEat" min="50" max="90" oninput="checkForBalls()">
+
+			<input type="text" name="ballsToEat" id="ballsToEat" min="50" max="90" oninput="checkForBalls()">
+
 			<br>
 
 			<!-- <button type="button" onclick="chooseBalls()">OK</button> -->
 			<p id="pForchoosecolor">please choose a color for each kind:</p>
+
 			<label for="color5ball">color for 5 point</label>		   
 			<input type="color" name ="color5" id ="color5" required><br>
 			<label for="color5ball">color for 15 point</label>		   
@@ -186,52 +244,59 @@
 			<label for="color5ball">color for 25 point</label>		   
 			<input type="color" name ="color25" id ="color25" required>
 
+
 			<br>
 			<!-- <button type="button" onclick="chooseColorBall()">OK</button> -->
 			<p id="pForchoosetime">please choose time for the game:</p>
-			<label for="timeForGame">time for the game</label>		   
-			<input type="number" name ="timeForGame" id ="timeForGame" oninput="checkFortime()">
+
+			<label for="timeForGame">time for the game</label>
+			<input type="number" name="timeForGame" id="timeForGame" oninput="checkFortime()">
 			<!-- <button type="button" onclick="chooseTimePlay()">OK</button> -->
 
 			<p id="pForchoosemanster">please choose number for manster:</p>
 			<br>
-			<label for="manster">number of munster</label>		   
-			<input type="number" name ="numOfMansterIn" id ="numOfMansterIn" oninput="checkForManster()">
+			<label for="manster">number of munster</label>
+			<input type="number" name="numOfMansterIn" id="numOfMansterIn" oninput="checkForManster()">
 			<br>
 			<!-- <button type="button" onclick="chooseNumOfmanster()">OK</button> -->
 			<button type="submit" onclick="settings()" id="settingsbutton" disabled>Start game</button>
-			<button type="submit" onclick="randomSettings()" id="randombutton" >Random settings</button>
+			<button type="submit" onclick="randomSettings()" id="randombutton">Random settings</button>
 			<button type="submit" onclick="clearText()" id="resetButton" style="display:none;">Reset</button>
+
+
 		</div>
 
 	</div>
 
-<div id="dialog" class="modal">
-	<dialog id="modal-dialog">
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<dialog id="modal-dialog"></dialog>
+			<span class="close">&times;</span>
+			<p>Shay Erlich & Hallel Helfand</p>
+			<p>we use jQuery to validate the user details:</p>
+			<p>we check </p>
+			<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
+			<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
+			<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjghdfghfdkjghdfgkjhdfj</p>
+			<p>template uses.....</p>
+			<p>dificult...........</p>
+			</dialog>
+		</div>
+	</div>
 
-	<button id="close" class="close" type="button">&times;</button>
-	<br>
-	<br>
-	<p>Shay Erlich & Hallel Helfand</p>
-	<p>we use jQuery to validate the user details:</p>
-	<p>we check </p>
-	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
-	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjgh</p>
-	<p>jfghkjdfghfdkjghdfgkjhdfjghdfjghdfjghdfghfdkjghdfgkjhdfj</p>
-	<p>template uses.....</p>
-	<p>dificult...........</p>
-	</dialog>
+	<!-- <div class="footer">
+		<a>&nbsp;&nbsp;hallel mail&nbsp;</a>
+		<a href="mailto:hallelh@post.bgu.ac.il">hallelh@post.bgu.ac.il</a>
+		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shay mail&nbsp;</a>
+		<a href="mailto:shaier@post.bgu.ac.il" shaier@post.bgu.ac.il></a>
+		<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pac-Man is a
+			maze arcade game developed and released by Namco in 1980 </a>
+		<a>, and now we implement our own pacman :) </a>
+	</div> -->
 
-</div>
 
-<!-- <div class="footer">
-	<a>&nbsp;&nbsp;hallel mail&nbsp;</a>
-	<a href="mailto:hallelh@post.bgu.ac.il">hallelh@post.bgu.ac.il</a>
-	<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shay mail&nbsp;</a>
-	<a href="mailto:shaier@post.bgu.ac.il"shaier@post.bgu.ac.il></a>
-	<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pac-Man is a maze arcade game developed and released by Namco in 1980 </a>
-	<a>, and now we implement our own pacman :) </a>
-  </div> -->
+
+
 
 </body>
 
