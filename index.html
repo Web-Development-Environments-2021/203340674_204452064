@@ -108,58 +108,6 @@
 			</form>
 		</div>
 
-		<div id="game_window">
-		
-			<div id="player_name">
-				<input id="lblPlayerName" type="text" />
-			</div>
-			<div id="score" >
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="life" >
-				<label for="lblLife">LIFE GAME:</label>
-				<input id="lblLife" type="text" />
-			</div>
-			<div id="time" >
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="newGame" >
-				<button type="button" onclick="newGame()"
-					style="font-size: x-large; font-family: 'papyrus', fantasy;">NEW GAME</button>
-			</div>
-
-			<br>
-			<div class="label-form">
-				<label for="brth">Birthday</label>
-			</div>
-			<input type="date" id="birthday" name="birthday">
-			<br>
-			<br>
-			<input type="button" class="button" id="submit-button" type="submit" value="Register" onclick="addUser()">		
-			</form>
-		</div>
-
-		<div id ="login_window">
-			<form>
-				<div class="label-form">
-					<label for="Uname">user Name</label>
-				</div>
-				<input type="text" name = "name" id ="usernamelogin" required>
-				<br>
-				<br>
-				<div class="label-form">
-					<label for="psw">Password</label>
-				</div>
-				<input type="password" name = "psw" id ="psw_login" required>
-				<br>
-				<br>
-				<button type="button" class="button" onclick="checkUserExist()" >login</button>
-				<br>
-			</form>
-		</div>
-
 		<div id="game_window" class="game_window">
 			<div id="player_name">
 				<input id="lblPlayerName" type="text" />
