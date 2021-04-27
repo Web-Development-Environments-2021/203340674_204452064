@@ -79,7 +79,7 @@ p{
 
 .settings_window {
     margin-right: 500px;
-    margin-top: 80px;
+    margin-top: 50px;
     /* position: absolute; */
     /* left: 40%; */
 }
@@ -87,7 +87,6 @@ p{
     position: absolute;
     left: 40%;
     top: 30%;
-
 }
 .label-form{
     font-size: 20px;

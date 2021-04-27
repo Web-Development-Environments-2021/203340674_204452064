@@ -15,12 +15,13 @@ var time_remain = timeGame;
 var interval;
 var interval2;
 var intervalMonster;
+
 var upKey=38;
 var downKey=40;
 var rightKey=39;
 var leftkey=37;
-//food
 
+//food
 var food_remain;
 var food5;
 var food15;
@@ -41,6 +42,7 @@ var eyeX = 5;
 var eyeY = -15;
 var monsterOnsweets=[0,0,0,0];
 
+var slowMotiom;
 var soundGame;
 
 
@@ -119,6 +121,7 @@ function Start() {
 	// soundGame = new sound("test.mp3");
 	// soundGame.play();
 	lifeGame=5;
+	slowMotiom = 1;
 	score = 0;
 	pac_color = "yellow";
 	var cnt = width*height;//num of cells
@@ -177,6 +180,10 @@ function Start() {
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2;
+				}
+				else if((randomNum < (1.0 * (slowMotiom + food_remain)) / cnt) && slowMotiom>0){
+					slowMotiom -- ;
+					board[i][j] = 10;
 				}
 				 else {
 					board[i][j] = 0;
@@ -330,7 +337,12 @@ function Draw() {
 				context.drawImage(monImg,center.x-20, center.y-20,40,40);
 				 context.fill();
 			}
-			
+			else if(board[i][j] == 10){
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black";
+				context.fill();
+			}	
 		}
 	}
 }
@@ -409,6 +421,10 @@ function UpdatePosition() {
 	if(board[shape.i][shape.j] ==7){
 		window.clearInterval(interval2);
 		score = score+50;
+	}
+	if(board[shape.i][shape.j] == 10){
+		clearInterval(intervalMonster);
+		intervalMonster = setInterval(UpdatePositionMonsters, 600);
 	}
 	
 	// UpdatePositionMonsters()
@@ -651,7 +667,7 @@ function UpdatePostionpizza(){
 	i=pizza[0];
 	j=pizza[1];
 	let flag=true;
-	let listWithoutFood= [1,3,5,0];
+	let listWithoutFood= [1,3,5,0,10];
 	let NewPos;
 	while(flag==true){
 		NewPos = Math.floor(Math.random()*(5-1))+1;
@@ -693,7 +709,7 @@ function UpdatePostionpizza(){
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
-	var foods = [1,3,5,7];
+	var foods = [1,3,5,7,10];
 	if(foods.includes(monsterOnsweets[monInd])){
 		board[i][j] = monsterOnsweets[monInd];
 	}
