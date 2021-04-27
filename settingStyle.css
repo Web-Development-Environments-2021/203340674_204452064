@@ -19,8 +19,8 @@
 
 .game_window{
     position: absolute;
-    left: 20%;
-    bottom : 10px
+    left: 12%;
+    bottom : 40px
     
 }
 #player_name, #score, #life, #time, #newGame {
@@ -43,4 +43,8 @@
     width: 190px;
     margin-left: 20px;
 }
+#settingsbutton{
+    background:gray;
+}
+
 
