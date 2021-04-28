@@ -2,11 +2,13 @@
 function switchToLogin(){
     $('#windows').children().hide();
     $('#login_window').show();
+    closeGame();
 }
 
 function switchToRegister(){
     $('#windows').children().hide();
     $('#register_window').show();
+    closeGame();
 }
 
 function switchToGame(){
@@ -32,6 +34,7 @@ function switchToGame(){
 function switchToWelcome(){
     $('#windows').children().hide();
     $('#first_window').show();
+    closeGame();
 }
 function switchDialogAboout(){
  
