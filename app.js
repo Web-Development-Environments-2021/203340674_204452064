@@ -73,7 +73,7 @@ function newGame(){
 	switchTosettings();	
 }
 
-
+//locate monster in the corners every new game and after rejection
 function EmptyCellForMonster(){
 	var cellsOfMonsters = [] //location of monster
 	var corners=[[0,0],[width-1,0],[0,height-1],[width-1,height-1]]; // all corners
@@ -93,7 +93,7 @@ function EmptyCellForMonster(){
 	}
 	return cellsOfMonsters;
 }
-
+//get i,j and check if there monster
 function checkIfMonsterCell(monsterLoc,i,j){
 	for (var ind = 0; ind <monsterLoc.length;ind++){
 		if (monsterLoc[ind][0] == i && monsterLoc[ind][1] == j){
@@ -102,6 +102,7 @@ function checkIfMonsterCell(monsterLoc,i,j){
 	}
 	return false;
 }
+//initialize board from last round
 function removeMonsterFromLastRound(){
 	var row;
 	var col;

@@ -67,7 +67,7 @@ $(function(){
 		if (event.target == document.getElementById("modal-dialog")) {
             
 			closedialog();
-			switchToWelcome();
+			// switchToWelcome();
 
 		}
 	  }
@@ -76,13 +76,13 @@ $(function(){
 		if (event.keyCode == 27) {
 			// try close your dialog
 			closedialog();
-			switchToWelcome();
+			// switchToWelcome();
 		}
 	});
 })
 function closedialog(){
     document.getElementById("modal-dialog").style.display = "none";
-    switchToWelcome();
+    // switchToWelcome();
 }
 
 
