@@ -2,7 +2,7 @@
     position: absolute;
     left: 30%;
     top: 20%;
-    width: 600px;
+    width: 530px;
     
 }
 .settinsKeys{
@@ -20,7 +20,7 @@
 .game_window{
     position: absolute;
     left: 12%;
-    bottom : 40px
+    bottom : 40px;
     
 }
 #player_name, #score, #life, #time {
@@ -30,7 +30,7 @@
 }
 #newGame{
     display:inline-block;
-    margin-left: 250px;
+    margin-left: 160px;
     
 }
 #lblPlayerName, #lblScore, #lblLife, #lblTime{
