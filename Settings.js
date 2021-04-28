@@ -89,13 +89,8 @@ function ChoosekeyRight(){
 //Initializes number of balls/food for the game
 function chooseBalls(){
     let foodInput = document.getElementById("ballsToEat").value;
-    if(foodInput>=50 && foodInput<=90){
-        food_remain= foodInput;
-        kindOfFood();
-    }
-    else{
-        alert("insert between 50-90"); 
-    }
+    food_remain= foodInput;
+    kindOfFood();
 }
 
 // Initializes the different of food/ball for the game
@@ -195,14 +190,20 @@ function readOnlyStettings(){
 
 //update the fields fot new game
 function updateForNewGame(){
+    orignalSettings();
+    buttonAble();
+    
+}
+
+function orignalSettings(){
     $('#settings_window').css({left:'28%',top:'20%'});
     $('#settingsbutton').show();
     $('#randombutton').show();
     $('#pForchooseKey').show();
-    $('#pForchooseBalls').show();
-    $('#pForchoosecolor').show();
-    $('#pForchoosetime').show();
-    $('#pForchoosemanster').show();
+    $('#press').show();
+    // $('#pForchoosecolor').show();
+    // $('#pForchoosetime').show();
+    // $('#pForchoosemanster').show();
     $('#resetButton').show();
     document.getElementById("up").readOnly= false;
     document.getElementById("down").readOnly= false;
@@ -214,8 +215,6 @@ function updateForNewGame(){
     document.getElementById("color25").readOnly= false;
     document.getElementById("timeForGame").readOnly= false;
     document.getElementById("numOfMansterIn").readOnly= false;
-    buttonAble();
-    
 }
 
 //music for game
@@ -274,7 +273,6 @@ function checkForManster(){
 function buttonAble(){
     $('#settingsbutton').css({background:'#c9367a'});
     document.getElementById("settingsbutton").disabled =false;
-
 }
 
 //clear the text area 
@@ -284,14 +282,15 @@ function clearText(){
     document.getElementById("left").value = "";
     document.getElementById("right").value = "";
     document.getElementById("ballsToEat").value = "";
-    document.getElementById("color5").value = "";
-    document.getElementById("color15").value = "";
-    document.getElementById("color25").value = "";
+    document.getElementById("color5").value = "#rrggbb";
+    document.getElementById("color15").value = "#rrggbb";
+    document.getElementById("color25").value = "#rrggbb";
     document.getElementById("timeForGame").value = "";
     document.getElementById("numOfMansterIn").value = "";
     document.getElementById("settingsbutton").disabled=true;
+    $('#settingsbutton').css({background:'gray'});
     counterForSetButtoml=0;
-
+    orignalSettings();
 }
 
 // function chooseKeys(){
