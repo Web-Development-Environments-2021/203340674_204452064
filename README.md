@@ -7,7 +7,7 @@ end of the game:
 the game ends when all lives are lost / or time is over, the player also can choose how long the game/ When all of the sweets are eaten. 
 If Pac-Man makes contact with a monster, he will lose a life.
 more charcters:
-Placed at random cells slow image - Eating these will cause the  monster move a bit lower.
+Placed at random cells slow image - Eating these will cause the  monster move a bit lower, after rejection the slowmotion disapeer.
 Pac-Man can eat +1 or +2 images for bonus life, and eat the -1 image bring down life.
 Pac-Man can eat the pizza image for bonus points(+50).
 
