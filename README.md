@@ -1,4 +1,9 @@
 # Assignment2
+https://web-development-environments-2021.github.io/Assignment2_203340674_204452064/
+
+Shay Erlich שי ארליך
+Hallel Helfand הלל הלפנד
+
 pack - man game:
 To start playing - user need to register with all requires fields, then settings window show. read the rest information to understand more. 
 Pac-Man is a maze chase video game, the player controls the character (yellow smiley image) through an enclosed maze.
