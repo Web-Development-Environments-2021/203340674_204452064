@@ -23,7 +23,7 @@ var leftkey=37;
 
 //food
 var food_remain;
-var leftToEat=0;
+// var leftToEat=0;
 var food5;
 var food15;
 var food25;
@@ -55,11 +55,8 @@ var soundGame;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");   
-	
-	//logo window
 	initial();
-	//game window
-	//Start();
+	
 });
 function initial() {
 	switchToWelcome();
@@ -71,6 +68,15 @@ function newGame(){
 	updateForNewGame();	
 	soundGame.stop();
 	switchTosettings();	
+}
+
+function closeGame(){
+	clearAllInterval();
+	if(soundGame!= undefined){
+		soundGame.stop();
+	}
+	orignalSettings();
+	clearText();	
 }
 
 //locate monster in the corners every new game and after rejection
@@ -130,8 +136,8 @@ function Start() {
 	lifeGame=5;
 	slowMotiom = 1;
 	flagSlowMotion= true;
-	leftToEat = food_remain;
-	leftToEat++;
+	// leftToEat = food_remain;
+	// leftToEat++;
 	score = 0;
 	plusLife1 = 1;
 	plusLife2 = 1;
@@ -204,6 +210,7 @@ function Start() {
 		}
 		
 	}
+	
 	setFoodRemaine();
 	setLifeAndSlow();
 	//click
@@ -229,7 +236,7 @@ function Start() {
 
 //set the lifeImg and slowImg in random position
 function setLifeAndSlow(){
-	let emptyCell =  findRandomEmptyCell(board);
+	var emptyCell =  findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 10;
 	emptyCell =  findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = 11;
@@ -299,6 +306,7 @@ function Draw() {
 	lblLife.value = lifeGame;
 	//lblTime.value = time_remain;
 	lblTime.value = time_remain	
+	var leftToEat = true;
 	for (var i = 0; i < width; i++) {
 		for (var j = 0; j < height; j++) {
 			var center = new Object();
@@ -343,10 +351,12 @@ function Draw() {
 				let pizzaImg = document.getElementById('pizza');
 				context.drawImage(pizzaImg,x1-20, y1-20 ,30,30);
 				context.fill();
+				leftToEat= false;
 				
 			}
 			else if (board[i][j] == 1 || board[i][j]==3|| board[i][j]==5) { // sweets
 				DrawDiffFood(board[i][j],center.x,center.y);
+				leftToEat= false;
 			
 			} else if (board[i][j] == 4) { // walls
 				context.beginPath();
@@ -384,9 +394,11 @@ function Draw() {
 				context.drawImage(Img1min,center.x-20, center.y-20,40,40);
 				context.fill();
 			}
-			
-
 		}
+	}
+	if(leftToEat){
+		clearAllInterval();
+		alert("winner!! good job")
 	}
 }
 
@@ -457,17 +469,17 @@ function UpdatePosition() {
 
 	if (board[shape.i][shape.j] == 1) { // 5 points
 		score = score+5;
-		leftToEat--;
+		// leftToEat--;
 	}
 	else if (board[shape.i][shape.j] == 3) { // 15 pounts
 		score = score+15;
-		leftToEat--;
+		// leftToEat--;
 	}
 	else if (board[shape.i][shape.j] ==5) { //25 point
 		score = score+25;
-		leftToEat--;
+		// leftToEat--;
 	}
-	else if(board[shape.i][shape.j] ==7){  // move food, 50 points
+	else if(board[shape.i][shape.j] ==7){  // pizza, 50 points
 		pacmanEatPizza();
 	}
 	else if(board[shape.i][shape.j] == 10){ //slow motion
@@ -495,11 +507,15 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = (timeGame - time_elapsed).toFixed(0);
 	
-	if(leftToEat<=0){
-		clearAllInterval();
-		alert("winner!! good job")
+	if (score >= 30 && time_remain <= 10) {
+		pac_color = "green";
 	}
-	if( time_remain <= 0){
+
+	// if(leftToEat<=0){
+	// 	clearAllInterval();
+	// 	alert("winner!! good job")
+	// }
+	else if( time_remain <= 0){
 		clearAllInterval();
 		if(score<100){
 			window.alert("You are better than "+ score + " points");
@@ -508,13 +524,10 @@ function UpdatePosition() {
 			alert("WINNER!!")
 		}
 	}
-	if (score >= 30 && time_remain <= 10) {
-		pac_color = "green";
-	}
-	if (score == 1000) {
-		clearAllInterval();
-		window.alert("Game completed");
-	} 
+	// if (score == 1000) {
+	// 	clearAllInterval();
+	// 	window.alert("Game completed");
+	// } 
   else 
   {
 		Draw();	
@@ -763,7 +776,7 @@ function UpdatePostionpizza(){
 }
 //check if curr cell included food - for return when monster pass else put in cell value 0
 function whichObject(i,j,monInd){
-	var foods = [1,3,5,7,10,11,12,13];
+	var foods = [1,3,5,10,11,12,13];
 	if(foods.includes(monsterOnsweets[monInd])){
 		board[i][j] = monsterOnsweets[monInd];
 	}
@@ -776,5 +789,5 @@ function whichObject(i,j,monInd){
 function pacmanEatPizza(){
 	window.clearInterval(interval2);
 	score = score+50;
-	leftToEat--;
+	// leftToEat--;
 }
